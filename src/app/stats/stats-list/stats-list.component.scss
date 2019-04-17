@@ -1,0 +1,36 @@
+.card {
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: none;
+}
+
+.is-link {
+  text-decoration: none;
+}
+
+.modal .modal-card-head {
+  text-align: center;
+}
+
+.modal-card-foot {
+  justify-content: space-between;
+}
+
+/*** add class to the "active" accordion ***/
+h1  {
+  display: inline;
+ // color: #772953 !important;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.small-cell {
+  width: 0.1%;
+  white-space: nowrap;
+}

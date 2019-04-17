@@ -1,0 +1,283 @@
+<div class="content" *ngIf="!showResults">
+  <button class="button is-info is-outlined is-pulled-right" (click)="openModalToStartQuiz()">Dodaj kviz</button>
+
+  <h1 style="display: inline">Aktivni kvizovi:</h1>
+  <hr>
+
+  <div class="columns is-multiline">
+    <div *ngFor="let exam of exams | async" class="column is-half">
+      <exam-detail [exam]='exam'></exam-detail>
+    </div>
+  </div>
+  
+  <!--
+  <div *ngIf="!exams.length">
+    <h5 class="table-head"><b>Trenutno nema aktivnih kvizova!</b></h5>
+  </div>
+  -->
+ 
+  <!-- maybe not necessary, or at least make better one -->
+  <loading-spinner *ngIf="showSpinner"></loading-spinner>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- results -->
+
+<div *ngIf="showResults" class="has-text-grey-dark content">
+  <article class="message is-info" *ngIf="exam | async as exam">
+    <div class="message-header has-text-centered">
+      <p>{{ exam.subjectName }}</p>
+    </div>
+
+    <!-- for non-synced -->
+    <div *ngIf="!exam.isSynced" class="message-body has-text-centered">
+      <h3>{{ exam.quiz.name }}</h3>
+      <p>{{ exam.classroomName }}</p>
+
+      <br>
+      <table class="table is-striped is-narrow">
+        <thead>
+          <tr>
+            <th>Ime učenika</th>
+            <th>Priprema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of exam.activeStudents">
+            <td *ngIf="student">{{ student.name }}</td>
+            <td *ngIf="student && student.started" class="green">{{ student.points }}</td>
+            <td *ngIf="student && !student.started" class="red"> - </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+      <p>
+        <button class="button is-info is-outlined" (click)="returnToList()">Povratak</button>
+        <button class="button is-info is-outlined" (click)="deleteQuiz()">Obriši</button>
+      </p>
+    </div>
+
+
+
+    <!-- for synced exams -->
+
+    <div *ngIf="exam.isSynced" class="message-body has-text-centered">
+        <h3>{{ exam.quiz.name }}</h3>
+        <p>{{ exam.classroomName }}</p>
+  
+        <table class="table is-striped is-narrow" *ngIf="exam.activeStudents">
+          <thead>
+            <tr>
+              <th>Ime učenika</th>
+              <th>Priprema</th>
+              <th>Obriši učenika</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of exam.activeStudents">
+              <td *ngIf="student">{{ student.name }}</td>
+              <td *ngIf="student && student.started" class="green">{{ student.points }}</td>
+              <td *ngIf="student && !student.started" class="red"> - </td>
+              <td *ngIf="student">
+                <button class="button is-small is-info" (click)="deleteStudent(student.index)">
+                  <i class="fa fa-ban"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <br>
+        <p>
+          <button class="button is-info is-outlined" (click)="returnToList()">Povratak</button>
+          
+          <button *ngIf="!exam.isStarted" class="button is-info is-outlined"
+            (click)="startExam(exam)">Pokreni</button>
+          <span *ngIf="exam.isStarted">
+            Kviz je pokrenut!
+          </span>
+          
+          <button class="button is-info is-outlined" (click)="deleteQuiz()">Obriši</button>
+        </p>
+      </div>
+  </article>
+</div>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- modal - START quiz -->
+
+<div class="modal" id="modalStartQuiz" *ngIf="showStartQuizForm">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+
+      <!--<p class="modal-card-title">-->
+      <p class="modal-card-title">Pokreni kviz</p>
+        
+      <button class="delete" aria-label="close" (click)='closeModalStartQuiz()'></button>
+    </header>
+    <section class="modal-card-body">
+      
+      <!-- predmet, kviz, razred -->
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Predmet</label>
+        </div>
+        <div class="field-body">
+          <div class="control full-width has-icons-left">
+            <div class="select is-fullwidth">
+              <select [(ngModel)]="selectedSubject">
+                <option [ngValue]="pickSubject" disabled="true" selected>{{ pickSubject.name }}</option>
+                <option *ngFor="let subject of subjects | async" [ngValue]="subject">{{ subject.name }}</option>
+              </select>
+            </div>
+            <span class="icon is-small is-left">
+              <i class="fa fa-book"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal" *ngIf="selectedSubject.active">
+        <div class="field-label is-normal">
+          <label class="label">Kviz</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control full-width has-icons-left">
+              <div class="select is-fullwidth">
+                <select [(ngModel)]="selectedQuiz">
+                  <option [ngValue]="pickQuiz" disabled="true" selected>{{ pickQuiz.name }}</option>
+                  <option *ngFor="let quiz of selectedSubject.quizzes" [ngValue]="quiz">{{ quiz.name }}</option>
+                </select>
+              </div>
+              <span class="icon is-small is-left">
+                <i class="fa fa-list-ol"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Razred</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control full-width has-icons-left">
+              <div class="select is-fullwidth">
+                <select [(ngModel)]="selectedClassroom">
+                  <option [ngValue]="pickClassroom" disabled="true" selected>{{ pickClassroom.name }}</option>
+                  <option *ngFor="let classroom of classrooms | async" [ngValue]="classroom">{{ classroom.name }}</option>
+                </select>
+              </div>
+              <span class="icon is-small is-left">
+                <i class="fa fa-users"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+     
+
+
+
+
+      <!-- DODATNO - datum završetka, vrijeme po pitanju -->
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Vrijeme odgovaranja</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <p class="control is-expanded has-icons-left">
+              <input class="input" type="number" placeholder="sec po pitanju"
+                [(ngModel)]="selectedStartQuiz.secondsPerQuestion">
+              <span class="icon is-small is-left">
+                <i class="fas fa-stopwatch"></i>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Sinkronizirano</label>
+        </div>
+        <div class="field-body">
+          <div class="field is-narrow">
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="sync" [value]="true"
+                  [(ngModel)]="selectedStartQuiz.isSynced">
+                Da
+              </label>
+              <label class="radio">
+                <input type="radio" name="sync" [value]="false"
+                  [(ngModel)]="selectedStartQuiz.isSynced">
+                Ne
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal" *ngIf="!selectedStartQuiz.isSynced">
+        <div class="field-label is-normal">
+          <label class="label">Do:</label>
+        </div>
+        <div class="field">
+          <p class="control is-expanded has-icons-left">
+            <input class="input" type="text" placeholder="Datum"
+              [(ngModel)]="selectedStartQuiz.openUntil">
+            <span class="icon is-small is-left">
+              <i class="fa fa-calendar"></i>
+            </span>
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <!-- check if everything is filled up -->
+      <div>
+        <button class="button is-primary" (click)='prepareQuiz()'>Pokreni</button>
+      </div>
+      <div>
+        <button class="button" (click)='closeModalStartQuiz()'>Odustani</button>
+      </div>
+    </footer>
+  </div>
+</div>

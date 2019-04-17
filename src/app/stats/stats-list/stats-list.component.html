@@ -1,0 +1,148 @@
+<div class="content">
+  <h1 style="display: inline">Rezultati:</h1>
+  <hr>
+  
+  <div *ngFor="let classroom of classrooms | async" class="card">
+    <stat-detail [classroom]='classroom'></stat-detail>
+  </div>
+  
+  <!-- maybe not necessary, or at least make better one -->
+  <loading-spinner *ngIf="showSpinner"></loading-spinner>
+</div>
+
+
+
+<!--
+<classroom-form></classroom-form>
+-->
+<!--
+<classroom-form *ngIf="showForm" [classroomForm]='classroomForm'></classroom-form>
+-->
+
+
+
+
+
+<!-- modal - QUIZ -->
+
+
+<div class="modal" id="questionsModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{ selectedQuiz.quizName }}</p>
+      <button class="delete" aria-label="close" (click)='closeQuestions()'></button>
+    </header>
+
+    <section class="modal-card-body" *ngIf="selectedQuiz as quiz">
+
+      <!-- quiz info -->
+      <p class="has-text-centered">Vrijeme po pitanju: {{ quiz.secondsPerQuestion }}
+        <br>
+         
+        <span *ngIf="quiz.isSynced">Sinkronizirano</span> 
+        <span *ngIf="!quiz.isSynced">Otvoreno do: {{ quiz.openUntil }}
+        </span>
+      </p>
+
+      <!-- table of questions -->
+      <div>
+        <table class="table is-narrow" *ngIf="quiz?.questions?.length">
+          <h5><b>Pitanja:</b></h5>
+          <tbody>
+            <tr *ngFor="let question of quiz.questions; let i = index">
+              <td class="small-cell">{{ i + 1 }}</td>
+              <td class="small-cell green" *ngIf="question.percent">{{ question.percent | number : '1.0-0' }}%</td>
+              <td>{{ question.text }}
+                <br *ngIf="question.givenAnswers">
+                <table class="table is-narrow" *ngIf="question.givenAnswers">
+                  <tr>
+                    <th>#</th>
+                    <th>Učenik</th>
+                    <th>Odgovor</th>
+                    <th>Vrijeme</th>
+                  </tr>
+                  <tr *ngFor="let answer of question.givenAnswers; let j = index">
+                    <td class="small-cell">{{ j + 1 }}</td>
+                    <td>{{ answer.student }}</td>
+                    <td [ngClass]="answer.correct ? 'green': 'red'">{{ answer.answer }}</td>
+                    <td>{{ (answer.time + 1) | number : '1.0-2' }}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="modal-card-foot">
+      <div>
+        <!--<button *ngIf="selectedQuiz.key" class="button is-primary" (click)='deleteQuiz()'>Obriši</button>-->
+      </div>
+      <div>
+        <button class="button" (click)='closeQuestions()'>Zatvori</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- modal - STUDENTS -->
+
+
+<div class="modal" id="studentsModal">
+  <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">{{ selectedClassroom.name }}</p>
+        <button class="delete" aria-label="close" (click)='closeStudents()'></button>
+      </header>
+  
+      <section class="modal-card-body" *ngIf="selectedClassroom as classroom">
+        <!-- table of students -->
+        <div *ngIf="!classroom.students">
+          Nema unesenih bodova.
+        </div>
+        
+        <div *ngIf="classroom.students">
+          <h5><b>Učenici:</b></h5>
+          <table class="table is-narrow" *ngIf="classroom.students?.length">
+            <thead>
+              <tr>
+                <th class="small-cell">#</th>
+                <th>Ime učenika</th>
+                <th>Bodovi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of classroom.students; let i = index">
+                <td class="small-cell">{{ i + 1 }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.points }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+  
+      <footer class="modal-card-foot">
+        <div>
+          <!--<button *ngIf="selectedQuiz.key" class="button is-primary" (click)='deleteQuiz()'>Obriši</button>-->
+        </div>
+        <div>
+          <button class="button" (click)='closeStudents()'>Zatvori</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+
+

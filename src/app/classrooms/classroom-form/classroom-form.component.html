@@ -1,0 +1,95 @@
+<!-- <div [selectedClassroom]='selectedClassroom'></div> -->
+
+<div class="modal" id="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+
+      <!--<p class="modal-card-title">-->
+      <div class="column is-offset-2 is-8">
+        <input placeholder="Naziv razreda" class="input"
+        [(ngModel)]="classroomForm.name"
+        required minlength="2" maxlength="30"
+        #name='ngModel' autofocus>
+      </div>
+       
+      <button class="delete" aria-label="close" (click)='close()'></button>
+    </header>
+    <section class="modal-card-body">
+      
+      <div>
+        
+        <!-- Optional note about classroom ... 
+        <input [(ngModel)]="content" placeholder="Add note" class="input">
+        -->
+
+        <!-- tablice za studente i predmete -->
+        <div class="columns">
+
+          <!-- students table -->
+          <table class="table is-narrow column is-offset-1 is-6" *ngIf="classroomForm.students?.length">
+            <h5><b>Popis učenika:</b></h5>
+            <tbody>
+              <tr *ngFor="let student of classroomForm.students; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ student.name }}</td>
+                <td><button class="button is-small is-danger" (click)='deactivateStudent(classroom?.id)'>
+                    <span class="icon">
+                    <i class="fa fa-trash-o"></i>
+                  </span>
+                </button></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="column is-offset-1 is-3">
+            <h5><b>Predmeti:</b></h5>
+            <p *ngFor="let subject of allSubjects">
+              <label class="checkbox" id="{{subject}}">
+                <input type="checkbox" value={{subject.name}} [(ngModel)]="subjects" (ngModelChange)="checkChange($event)">
+                {{subject.name}}
+              </label>
+            </p>
+          </div>
+    
+        </div>
+      </div>
+    </section>
+       
+    <footer class="modal-card-foot">
+
+      <!-- check if dirty, and act accordingly 
+      <div *ngIf="name.dirty">
+        <span *ngIf='name.errors; then errors else valid'>template renders here...</span>
+      </div>
+
+      <ng-template #valid>
+        <p class="help is-success">looks good!</p>
+      </ng-template>
+      
+      <ng-template #errors>
+        <p class="help is-danger">form contains errors!</p>
+      </ng-template>
+      -->
+
+      <div>
+        <!-- TODO - create item - rename functions once done -->
+        <button class="button is-primary" (click)='saveClassroom()' [disabled]="!name.valid">Spremi</button>
+        <!-- other option for validation:
+          [disabled]="name?.length < 2 || name?.length > 200"
+        -->
+        <button class="button" (click)='close()'>Odustani</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- additional buttons 
+
+<div class="card-footer">
+  <span class="button is-small is-success card-footer-item" *ngIf='classroom.active' (click)='updateActive(false)'>Mark Complete</span>
+  <span class="button is-small is-warning card-footer-item" *ngIf='!classroom.active' (click)='updateActive(true)'>Mark Incomplete</span>
+  <span class="button is-small is-danger card-footer-item" (click)='deleteClassroom()'>Delete</span>
+</div>
+
+-->

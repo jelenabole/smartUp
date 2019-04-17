@@ -1,0 +1,52 @@
+.button {
+  border-radius: 0;
+  margin: 10px 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.message-header h3 {
+  color: papayawhip;
+}
+
+
+
+.acc-header {
+  margin: 0;
+  width: 100%;
+  border-radius: 15px;
+  padding: 3%;
+  transition: 0.4;
+  transition: border-radius 0.1s ease-out;
+  text-align: left !important;
+  line-height: 4px;
+
+//  background-color: #828282;
+//  background-color: #772953;
+}
+
+.acc-body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  
+  border-radius: 0 0 15px 15px;
+ // border-color: #828282;
+ // border-color: #772953;
+  border-style: solid;
+  border-width: 0px;
+
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 0.2s ease-out, padding 0.1s;
+}
+
+.table-head {
+  margin-top: 4%;
+  display: inline-block;
+}
+
+.small-cell {
+  width: 0.1%;
+  white-space: nowrap;
+}

@@ -1,0 +1,95 @@
+
+// 1. Import the initial variables
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+// 2. Set your own initial variables
+@import "./styles/loading.scss";
+@import "./styles/smartup.scss";
+
+// rest of the bulma - makes problems:
+// @import "~bulma";
+
+/*
+// Add a serif family
+$family-serif: "Merriweather", "Georgia", serif;
+// Use the new serif family
+$family-primary: $family-serif;
+*/
+
+
+
+
+
+/*
+$blue: rgba(62, 123, 177, 0.767); // steel blue
+$orange: rgba(255, 107, 53, 0.753); // smashed pumpkin
+$pinkish: #F7C59F; // peach
+*/
+
+/* 
+//default:
+$blue: #17A2B8;
+$orange: #E95420;
+*/
+
+/*
+$blue: #17A2B8;
+$orange: #E95420;
+$pinkish: rgba(233, 86, 32, 0.45);
+$pinkish-invert: rgba(0, 0, 0, 0.7); 
+*/
+
+/*
+$blue: rgba(23, 163, 184, 0.884);
+$orange: rgba(233, 86, 32, 0.815);
+$pinkish: rgba(233, 86, 32, 0.5);
+*/
+
+/*
+$blue: rgba(74, 148, 134, 0.74);
+$orange: #F99A58;
+$pinkish: rgba(249, 155, 88, 0.5);
+*/
+
+
+// pink and aqua
+/*
+$orange: #FFAFB1;
+$pinkish: rgba(255, 175, 176, 0.7);
+$blue: rgba(0, 209, 178, 0.7);
+$orange-invert: rgba(0, 0, 0, 0.7);
+$pinkish-invert: rgba(0, 0, 0, 0.7);
+*/
+
+/*
+$pinkish: rgba(247, 197, 159, 0.5);
+$pinkish: rgba(233, 86, 32, 0.5);
+*/
+
+/*
+$black: $pinkish;
+$black-invert: rgba(0, 0, 0, 0.7);
+$primary: $orange;
+$link: $blue;
+*/
+
+
+$link: #17A2B8;
+$primary: #E95420;
+$dark: rgb(68, 67, 67);
+
+
+$warning: rgba(247, 197, 159, 0.7);
+$warning: rgb(244, 170, 143);
+$warning-invert: $dark;
+
+// 3. Set the derived variables
+// Use the new pink as the primary color
+// $primary: $orange;
+// Use the existing orange as the danger color
+// $danger: $orange;
+
+
+// 6. Import the rest of Bulma
+// @import "~bulma";

@@ -1,0 +1,122 @@
+<div class="content">
+  <button class="button is-info is-outlined is-pulled-right" (click)="addNewClassroom()">Dodaj razred</button>
+  <h1 style="display: inline">Moji razredi:</h1>
+  
+  <hr>
+  <p *ngIf="tutorial">Odaberite razred ili dodajte novi.</p>
+  
+  <div *ngFor="let classroom of classrooms | async" class="card">
+    <classroom-detail [classroom]='classroom'></classroom-detail>
+  </div>
+  
+  <!-- maybe not necessary, or at least make better one -->
+  <loading-spinner *ngIf="showSpinner"></loading-spinner>
+</div>
+
+
+
+
+
+<!-- MODAL - dodaj novi razred -->
+
+<div class="modal" id="modal" *ngIf="showForm">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+
+      <!--<p class="modal-card-title">-->
+      <div class="column is-offset-2 is-8">
+        <input placeholder="Naziv razreda" class="input is-focused"
+        [(ngModel)]="selectedClassroom.name"
+        required minlength="2" maxlength="30"
+        #name='ngModel' autofocus>
+      </div>
+       
+      <button class="delete" aria-label="close" (click)='closeModal()'></button>
+    </header>
+    <section class="modal-card-body" *ngIf="selectedClassroom?.students">
+      
+      <div>
+        <!-- tablice za studente i predmete -->
+        <div class="columns">
+
+          <!-- students table (or plain space) -->
+          <div class="column is-3" *ngIf="!selectedClassroom?.students?.length"></div>
+
+          <table class="table is-narrow column is-offset-1 is-6" *ngIf="selectedClassroom?.students?.length">
+            <h5><b>Popis učenika:</b></h5>
+            <tbody>
+              <tr *ngFor="let student of selectedClassroom.students; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ student.name }}</td>
+
+                <td><button class="button is-small is-primary" 
+                  (click)='deleteStudent(student)'>
+                    <span class="icon is-small">
+                    <i class="fa fa-trash-o"></i>
+                  </span>
+                </button></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!--
+          <div class="column is-offset-1 is-4">
+            <h5><b>Predmeti (ne radi):</b></h5>
+            <p *ngFor="let subject of selectedClassroom.subjects">
+              <label class="checkbox" id="{{subject.name}}">
+                <input type="checkbox" value={{subject}}
+                  (ngModelChange)="checkChange($event)" [checked]="subject.status">
+                  {{subject.name}}
+              </label>
+            </p>
+          </div>
+        -->
+    
+        </div>
+      </div>
+    </section>
+       
+    <footer class="modal-card-foot">
+      <div>
+        <button *ngIf="selectedClassroom.$key" class="button is-primary" (click)='deleteClassroom()'>Obriši razred</button>
+      </div>
+      <div>
+        <button class="button is-link" (click)='saveClassroom()' [disabled]="!name.valid">Spremi</button>
+        <button class="button" (click)='closeModal()'>Odustani</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+
+
+
+<!-- QR code modal -->
+
+<div class="modal" id="modalQRCode" *ngIf="showQRCode">
+
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <div class="column is-offset-2 is-8">
+          <h3>{{ selectedClassroom.name }}</h3>
+        </div>
+        <button class="delete is-medium" aria-label="close" (click)='closeQRCode()'></button>
+      </header>
+
+      <section class="modal-card-body">
+            <!-- QR code -->
+          <div class="column is-offset-3 is-6" *ngIf="tutorial">
+            explanation for QR codes
+          </div>
+
+          <div>
+              <img src="assets/images/QRcode.jpg" />
+          </div>
+      </section>
+         
+    </div>
+  </div>
+  

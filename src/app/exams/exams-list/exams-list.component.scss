@@ -1,0 +1,39 @@
+.card {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.red {
+  color: #E95420;
+}
+.green {
+  color: #38B44A;
+}
+
+.control.full-width  {
+  width: 100%;
+}
+
+.half-width {
+  width: 100%;
+}
+
+
+
+/****** modal ******/
+
+.modal-card-title {
+  margin: 0;
+  text-align: center;
+}
+
+.modal .modal-card-head input {
+  text-align: center;
+}
+.modal-card-head p {
+  margin: 0;
+}
+
+.modal-card-foot {
+  justify-content: space-between;
+}

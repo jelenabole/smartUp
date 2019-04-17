@@ -1,0 +1,33 @@
+.fa {
+  margin-left: 10%;
+}
+
+.button {
+  border-radius: 0;
+  margin: 10px 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+figure {
+  margin: 0px;
+}
+
+.box {
+  //background-color: green;
+  padding: 1rem; // možda i ne
+  // border-bottom: 2px solid grey;
+}
+
+.border-bottom {
+  border-bottom: solid 1px lightgrey;
+}
+
+.is-horizontally-centered {
+  justify-content: center;
+}
+
+/*** additional - fix bulma ****/
+.is-rounded {
+  border-radius: 25px;
+}

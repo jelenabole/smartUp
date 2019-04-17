@@ -1,0 +1,48 @@
+<div class="hero-foot" *ngIf="(auth.user | async)">
+  <nav class="tabs">
+    <div class="container has-text-centered">
+      <ul *ngIf="(auth.user | async)?.professor">
+        <!-- profesori -->
+        <li>
+          <a class="nav-item" routerLink="/classrooms">
+            Razredi
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" routerLink="/subjects">
+            Predmeti
+          </a>
+        </li>
+        <li class="is-active">
+          <a class="nav-item" routerLink="/exams">
+            Aktivni kvizovi
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" routerLink="/stats">
+            Rezultati
+          </a>
+        </li>
+      </ul>
+
+      <ul *ngIf="!((auth.user | async)?.professor)">
+        <!-- učenici -->
+        <li>
+          <a class="nav-item" routerLink="/quizzes">
+            Kvizovi
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" routerLink="/exercises">
+            Vježbe
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" routerLink="/results">
+            Bodovi
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

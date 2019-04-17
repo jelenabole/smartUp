@@ -1,0 +1,32 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+
+    "uploads": {
+      ".write": "auth != null"
+    },
+   "items": {
+      ".write": "auth != null"
+    },
+    "users": {
+      ".write": "auth != null"
+    },
+    "classrooms": {
+      ".write": "auth != null"
+    },
+    "subjects": {
+      ".write": "auth != null"
+    },
+    "quizzes": {
+      ".write": "auth != null"
+    },
+    "exams": {
+      ".write": "auth != null"
+    },
+    "exercises": {
+      ".write": "auth != null"
+    }
+
+  }
+}

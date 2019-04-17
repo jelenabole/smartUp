@@ -1,0 +1,110 @@
+<button class="accordion acc-header button is-dark is-outlined"
+  onclick="toggleAccord(this)">{{ subject.name }} </button>
+
+<div class="panel acc-body">
+  <div>
+    <!-- dodaj kviz -->
+    <button class="button is-pulled-right is-primary is-outlined" (click)='addQuiz()'>
+        <i class="fa fa-plus"></i>
+    </button>
+    <!-- pokreni kviz -->
+    <!--
+    <button class="button is-pulled-right is-primary is-outlined" (click)='startQuiz()'>
+        <i class="fa fa-calendar"></i>
+    </button>
+    -->
+     <!-- uredi predmet -->
+     <button class="button is-pulled-right is-info is-outlined" (click)='editSubject()'>
+        <i style="font-size: 21px;" class="fa fa-edit"></i>
+    </button>
+
+
+
+
+
+
+
+
+
+
+
+    <div *ngIf="!subject.quizzes?.length">
+        <h5 class="table-head"><b>Nema unesenih kvizova!</b></h5>
+    </div>
+
+    <div *ngIf="subject.quizzes?.length">
+      <h5 class="table-head"><b>Kvizovi:</b></h5>
+      <hr>
+    </div>
+  </div>
+
+  <div style="width: 100%" *ngIf="subject.quizzes?.length">
+    <table class="table is-narrow">
+      <tbody>
+        <tr *ngFor="let quiz of subject.quizzes; let i = index">
+          <td class="small-cell">{{ i + 1 }}</td>
+          <td><a (click)='editQuiz(quiz.key)'>{{ quiz.name }}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  
+
+
+
+
+
+<!--
+
+
+<div>
+  <article class="message">
+    <div class="message-header">
+      <h3 [ngClass]="{ 'strike-out': !subject.active }">{{ subject.name }}</h3>
+      <button>
+        <span class="icon">
+          <i class="fa fa-angle-down"></i>
+        </span>
+      </button>
+    </div>
+    <div class="message-body is-clearfix">
+
+      <button class="button is-pulled-right is-dark is-outlined" (click)='addQuiz()'>
+        Dodaj kviz
+      </button>
+      <button class="button is-pulled-right is-warning is-outlined" (click)='editSubject()'>
+        Uredi predmet
+      </button>
+      <button class="button is-pulled-right is-warning is-outlined" (click)='startQuiz()'>
+          Pokreni kviz
+      </button>
+
+      
+      <div class="columns">
+        <div class="column is-four-fifths" *ngIf="subject.quizzes?.length">
+          
+
+          <h6><b>Popis kvizova:</b></h6>
+          <hr>
+          
+          <table class="table is-narrow">
+            <tbody>
+              <tr *ngFor="let quiz of subject.quizzes; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td><a (click)='editQuiz(quiz.key)'>{{ quiz.name }}</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="column is-four-fifths" *ngIf="!subject.quizzes?.length">
+          <p>Nemate dostupnih kvizova.</p>
+          <hr>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</div>
+-->

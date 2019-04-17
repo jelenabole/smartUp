@@ -1,0 +1,71 @@
+.card {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+h1, h4 {
+  color: slategrey;
+}
+.message-body h4, .message-body p {
+  margin: 0;
+  color: slategrey;
+}
+
+.is-link {
+  text-decoration: none;  
+}
+
+:checked + label {
+  font-weight: bold;
+  border: 2px solid #17a2b8;
+  border-radius: 15px;
+}
+
+label {
+  display: block;
+  padding: 5%;
+  border: 2px solid lightslategray;
+  border-radius: 15px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+/********** za full height ********/
+.results {
+  font-size: 38px;
+}
+
+.quiz {
+  padding: 1%;
+}
+
+.keep-blue:focus {
+  background-color: #17a2b8;
+}
+
+.hero {
+  min-height: 98vh;
+}
+
+/******** black screen *******/
+
+.green {
+  color: #38B44A;
+}
+.red {
+  color: #E95420;
+}
+
+.blackscreen .modal-background { /* rgba(10,10,10,.86); */
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.big-time {
+  font-size: 7em;
+}
+
+.list p {
+  margin: 0;
+}

@@ -1,0 +1,53 @@
+// additional:
+.card {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+h1, h4 {
+  color: slategrey;
+}
+.message-body h4, .message-body p {
+  margin: 0;
+  color: slategrey;
+}
+
+.is-link {
+  text-decoration: none;  
+}
+
+:checked + label {
+  font-weight: bold;
+  border: 2px solid dodgerblue;
+  border-radius: 15px;
+}
+
+label {
+  display: block;
+  padding: 5%;
+  border: 2px solid lightslategray;
+  border-radius: 15px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+
+/********** za full height ********/
+
+.results {
+  font-size: 38px;
+}
+
+.quiz {
+  padding: 1%;
+}
+
+.keep-blue:focus {
+  background-color: #17a2b8;
+}
+
+.margin-top {
+  margin-top: 6%;
+}

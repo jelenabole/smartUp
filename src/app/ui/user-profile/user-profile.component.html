@@ -1,0 +1,61 @@
+<div *ngIf="auth.user | async; then authenticated else guest">
+    <!-- template will replace this div -->
+</div>
+
+
+<!-- User NOT logged in -->
+<ng-template #guest class="box">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div (click)="triggerButton()">
+        <h2>Niste prijavljeni!</h2>
+        <p class="card-text">Prijavite se za početak...</p>
+      </div>
+
+      <button *ngIf="!hideButton" (click)="triggerButton()" 
+        class="button is-small" routerLink="/login">Prijava</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user | async as user" class="has-text-centered">
+
+    <!-- prof new profile -->
+    <div *ngIf="user.professor" class="card-img-top">
+      <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" 
+        width=50px (click)="triggerButton()">
+      <p style="width: 100%">
+        {{ user.displayName }}
+      </p>
+    </div>
+
+
+    <!-- student new profile -->
+    <div class="hero-body" *ngIf="!user.professor">
+      <div class="container has-text-centered">
+        <div class="card-img-top" (click)="triggerButton()">
+          <div class="floating-points">
+            <span class="tag is-link" *ngIf="user.points"> {{ user.points }} </span>
+            <span class="tag is-link" *ngIf="!user.points"> 0 </span>
+          </div>
+
+          <h1 class="title">
+            <div class="card-img-top blue-background">
+              <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" 
+                width="50px">
+            </div>
+          </h1>
+          <h2 class="subtitle grey-dark">
+            {{ user.displayName }}
+          </h2>
+          <button *ngIf="!hideButton" (click)="triggerButton(); logout();"
+            class="button is-small">Odjava</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>

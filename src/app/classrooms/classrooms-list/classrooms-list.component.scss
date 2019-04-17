@@ -1,0 +1,32 @@
+.card {
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: none;
+}
+
+.is-link {
+  text-decoration: none;
+}
+
+#modalQRCode {
+  text-align: center;
+}
+
+.modal .modal-card-head input {
+  text-align: center;
+}
+
+.modal-card-foot {
+  justify-content: space-between;
+}
+
+/*** add class to the "active" accordion ***/
+.active-removed {
+  border-color: red;
+  color: yellow;
+}
+
+h1  {
+  display: inline;
+  // color: #772953 !important;
+}

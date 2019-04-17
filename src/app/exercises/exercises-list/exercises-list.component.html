@@ -1,0 +1,255 @@
+<div class="content" *ngIf="!ifQuizSelected">
+  <!-- search button -->
+  <div class="is-clearfix">
+    <div class="field has-addons is-pulled-right">
+      <p class="control is-marginless">
+        <input class="input is-link is-marginless" type="text" placeholder="Pretraži"
+          [(ngModel)]="searchText" required>
+      </p>
+      <p class="control" (click)="search()">
+        <a class="button is-link">
+          <i class="fa fa-search"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+  
+  <!--
+    <button class="button is-link is-outlined is-pulled-right" (click)="search()">Search</button>
+  -->
+
+  <!--<h1 style="display: inline">Vježbe:</h1>-->
+
+  <hr>
+  <p *ngIf="tutorial">Odaberi kviz.</p>
+  
+  <div class="columns is-multiline">
+    <div *ngFor="let exercise of exercises | async" class="column is-half">
+      <exercise-detail [exercise]='exercise'></exercise-detail>
+    </div>
+  </div>
+
+
+  <!--
+  <div *ngIf="exercises?.length">
+    <h5 class="table-head"><b>Trenutno nema aktivnih kvizova!</b></h5>
+  </div>
+  -->
+  
+  <!-- maybe not necessary, or at least make better one -->
+  <loading-spinner *ngIf="showSpinner"></loading-spinner>
+  
+</div>
+
+
+
+
+
+
+
+
+<div *ngIf="ifQuizSelected" class="has-text-grey">
+  
+  <!-- details of the exercise -->
+
+  <div *ngIf="showDetails">
+    <section class="hero is-light is-fullheight is-mobile">
+      <div class="hero-head">
+        <div class="container">
+            <button class="button is-link is-outlined" (click)="stopQuiz()">Povratak</button>
+        </div>
+      </div>
+      
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <p class="title">
+            {{ selectedExercise.quiz.name }}
+          </p>
+          <p class="subtitle">
+            Naziv predmeta
+          </p>
+          <p>
+            <br>Broj pitanja: {{ selectedExercise.quiz.questions.length }}
+            <br>Vrijeme po pitanju: {{ selectedExercise.secondsPerQuestion }} s
+          </p>
+          <div class="margin-top">
+            <button class="button is-link is-large keep-blue" (click)='startQuiz()'>Pokreni kviz</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-foot has-text-centered">
+        <progress class="progress is-link" max="100" [attr.value]="progress"> </progress>
+      </div>
+    </section>
+  </div>
+
+  
+
+
+
+
+
+  <!-- <div *ngIf="currentQuestion != null"> -->
+
+  <div *ngIf="showQuestions">
+    <section class="hero is-light is-fullheight is-mobile">
+      <div class="hero-head">
+        <button class="button is-link is-outlined" (click)="stopQuiz()">Povratak</button>
+        <button class="button is-link is-outlined is-disabled is-pulled-right">{{ remaining }} s</button>
+      </div>
+
+      <div class="hero-body quiz">
+        <div class="container has-text-centered">
+          <p class="title">
+            {{ currentQuestion.text }}
+          </p>
+
+          <div class="columns is-multiline is-mobile">
+            <p *ngFor="let answer of currentQuestion.answers; let i = index" class="subtitle column is-half">
+                <input type="radio" name="answer" (click)="setAnswer(answer)" id="{{i}}" value="{{i}}" #ans>
+                <label for="{{i}}" class="field-label is-large has-text-centered">{{ answer.text }}</label>
+            </p>
+          </div>
+
+          <div class="has-text-centered margin-top">
+            <button class="button is-link is-large keep-blue" (click)="checkAnswer()">Odgovori</button>
+          </div>
+
+        </div>
+      </div>
+    
+      <div class="hero-foot has-text-centered">
+        <progress class="progress is-link" max="100" [attr.value]="progress"> </progress>
+      </div>
+    </section>
+  </div>
+
+
+
+
+
+
+  <!-- results -->
+
+  <div *ngIf="showResults">
+    <section class="hero is-light is-fullheight is-mobile">
+      <div class="hero-head">
+        <button class="button is-link is-outlined" (click)="stopQuiz()">Povratak</button>
+      </div>
+    
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <p class="title">
+            {{ selectedExercise.quiz.name }}
+          </p>
+          <p class="subtitle">Naziv predmeta</p>
+
+          <div class="results">
+            <h1 class="points" style="display: inline">{{ currentPoints }}</h1>
+            <p style="display: inline"> / {{ selectedExercise.quiz.questions.length }}</p>
+          </div>
+          
+          <!-- lista studenata koji su riješili ispit i bodova -->
+          <div class="margin-top">
+            <button class="button is-link is-large" (click)='stopQuiz()'>Povratak</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="hero-foot has-text-centered">
+        <progress class="progress is-link" max="100" [attr.value]="progress"> </progress>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<div class="modal" [class.is-active]="blackScreen">
+  <div class="modal-background"></div>
+  <div class="modal-content has-text-centered">
+    <!-- Any other Bulma elements you want -->
+    <img *ngIf="selectedAnswer?.correct" src="assets/images/true.png" />
+    <img *ngIf="!selectedAnswer?.correct" src="assets/images/false.png" />
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- modal - eventualno detalji o ispitu -->
+<!--
+<div class="modal" id="modal" *ngIf="showForm">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+
+      <div class="column is-offset-2 is-8">
+        <input placeholder="Naziv razreda" class="input is-focused"
+        [(ngModel)]="selectedQuiz.name"
+        required minlength="2" maxlength="30"
+        #name='ngModel' autofocus>
+      </div>
+       
+      <button class="delete" aria-label="close" (click)='closeModal()'></button>
+    </header>
+    <section class="modal-card-body">
+      
+      <div>
+        
+        <div class="columns">
+
+          <div class="column is-3" *ngIf="!selectedQuiz?.students?.length"></div>
+
+          <table class="table is-narrow column is-offset-1 is-6" *ngIf="selectedQuiz?.students?.length">
+            <h5><b>Popis učenika:</b></h5>
+            <tbody>
+              <tr *ngFor="let student of selectedQuiz.students; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ student.name }}</td>
+
+                <td><button class="button is-small is-primary" 
+                  (click)='deleteStudent(student)'>
+                    <span class="icon is-small">
+                    <i class="fa fa-trash-o"></i>
+                  </span>
+                </button></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="column is-offset-1 is-4">
+            <h5><b>Predmeti (ne radi):</b></h5>
+            <p *ngFor="let subject of selectedQuiz.subjects">
+              <label class="checkbox" id="{{subject.name}}">
+                <input type="checkbox" value={{subject}}
+                  (ngModelChange)="checkChange($event)" [checked]="subject.status">
+                  {{subject.name}}
+              </label>
+            </p>
+          </div>
+    
+        </div>
+      </div>
+    </section>
+       
+    <footer class="modal-card-foot">
+      <div>
+        <button *ngIf="selectedQuiz.$key" class="button is-primary" (click)='deleteClassroom()'>Obriši razred</button>
+      </div>
+      <div>
+        <button class="button is-link" (click)='saveClassroom()' [disabled]="!name.valid">Spremi</button>
+        <button class="button" (click)='closeModal()'>Odustani</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+-->
+

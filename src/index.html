@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SmartUp</title>
+  <base href="/">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/united/bulmaswatch.min.css">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="msapplication-starturl" content="/">
+  <meta name="theme-color" content="#f48c5b">
+
+   <!-- charts 
+   <script src="node_modules/chart.js/src/chart.js"></script>
+   -->
+   <!--<script src="node_modules/chart.js/dist/Chart.js"></script>-->
+  
+  <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+
+  <app-root></app-root>
+
+  <div class="loading">
+    <h1>loading...</h1>
+    <!--
+      <img src="assets/images/loading.gif" alt="loading" width="300px">
+    -->
+  </div>
+  
+ 
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+      
+      .then((registration) => {
+        console.log('SW registered');
+      })
+      .catch((err) => {
+        console.log('SW error', err);
+      });
+    }
+  </script>
+
+  <script>
+    function toggleAccord(elem) {
+      var open = false;
+      // check if element should be opened:
+      var panel = elem.nextElementSibling;
+      // TODO - why isnt it 0px at the begining? 
+      if (panel.style.maxHeight == "0px" || panel.style.maxHeight == "") {
+        open = true;
+      }
+
+       // toggle all other elements:
+      var accords = document.getElementsByClassName("acc-header");
+      var panels = document.getElementsByClassName("acc-body");
+      for (i = 0; i < panels.length; i++) {
+        panels[i].style.maxHeight = "0px";
+        panels[i].style.padding = "0%";
+        panels[i].style.borderWidth = "0px";
+        accords[i].style.borderRadius = "15px";
+        accords[i].classList.remove("active");
+      }
+
+      // open the element:
+      if (open) {
+        panel.style.padding = "0% 4%";
+        panel.style.borderWidth = "1px";
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        elem.style.borderRadius = "15px 15px 0 0";
+        elem.classList.add("active");
+      }
+    }
+
+
+    function toggleQuestion(elem) {
+      // check if element should be opened:
+      var panel = elem.nextElementSibling;
+      console.log(panel);
+
+      // toggle all other elements:
+      var accords = document.getElementsByClassName("acc-header-question");
+      var panels = document.getElementsByClassName("acc-body-question");
+      for (i = 0; i < panels.length; i++) {
+        panels[i].style.display = "none";
+       // accords[i].classList.remove("active");
+      }
+      // open the element:
+      panel.style.display = "inline";
+      //elem.classList.add("active");
+    }
+  </script>
+
+</body>
+</html>

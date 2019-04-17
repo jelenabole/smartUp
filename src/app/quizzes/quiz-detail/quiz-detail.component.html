@@ -1,0 +1,53 @@
+
+<!--
+<article class="message is-link">
+
+  <div class="message-header">
+    <p>SUBJECT NAME</p>
+  </div>
+
+  <div class="message-body is-clearfix">
+    <p class="is-pulled-left is-marginless"> <strong> {{ quiz.quiz.name }} </strong>
+      <br> {{ quiz.professorName }} - {{ quiz.classroomName }}
+      <br>Vrijeme do: {{ quiz.openUntil }}
+    </p>
+    <button class="button is-pulled-right" (click)='startQuiz()'>
+      START <i class="fa fa-play"></i>
+    </button>
+  </div>
+</article>
+-->
+
+
+<div class="box is-paddingless is-shadowless">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64 is-flex is-horizontally-centered">
+        <img alt="Image" src="assets/images/owl-teacher.png">
+      </figure>
+    </div>
+    <div class="media-content border-bottom">
+      <div class="level">
+        <p class="is-pulled-left"> <strong> {{ quiz.quiz.name }} </strong> 
+          <br>
+          <small>{{ quiz.professorName }} - {{ quiz.classroomName }}
+            <span *ngIf="!quiz.isSynced">
+              <br>Do: {{ quiz.openUntil }}
+            </span>
+            <span *ngIf="quiz.isSynced">
+              <br>(synced)
+            </span>
+          </small>
+        </p>
+
+        <button *ngIf="!quiz.isSynced" class="button is-rounded is-primary is-small is-pulled-right" (click)='startQuiz()'>
+          START <!--<i class="fa fa-play"> </i>-->
+        </button>
+        <button *ngIf="quiz.isSynced" class="button is-rounded is-primary is-small is-pulled-right" (click)='startQuiz()'>
+          START <!--<i class="fa fa-play"> </i>-->
+        </button>
+      </div>
+    </div>
+  </article>
+</div>
+

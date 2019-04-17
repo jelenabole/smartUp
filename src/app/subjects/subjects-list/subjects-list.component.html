@@ -1,0 +1,228 @@
+<div class="content">
+  <button class="button is-info is-outlined is-pulled-right" (click)="openModalToAddSubject()">Dodaj predmet</button>
+  <h1 style="display: inline">Moji predmeti:</h1>
+  
+  <hr>
+  
+  <div *ngFor="let subject of subjects | async" class="card">
+    <subject-detail [subject]='subject'></subject-detail>
+  </div>
+  
+  <!-- maybe not necessary, or at least make better one -->
+  <loading-spinner *ngIf="showSpinner"></loading-spinner>
+</div>
+
+
+<!--
+<subject-form></subject-form>
+-->
+
+
+
+
+
+
+
+
+
+<!-- modal - QUIZ -->
+
+
+<div class="modal" id="modal" *ngIf="showForm">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+
+      <!--<p class="modal-card-title">-->
+      <div class="column is-offset-2 is-8">
+        <input placeholder="Naziv kviza" class="input is-focused"
+        [(ngModel)]="selectedQuiz.name"
+        required minlength="2" maxlength="30"
+        #name='ngModel' autofocus>
+      </div>
+       
+      <button class="delete" aria-label="close" (click)='closeModal()'></button>
+    </header>
+
+
+    <section class="modal-card-body">
+      
+      <!-- table of questions -->
+      <div>
+        <table class="table is-narrow" *ngIf="selectedQuiz?.questions?.length">
+          <h5><b>Pitanja:</b></h5>
+
+          <tbody>
+            <tr *ngFor="let question of selectedQuiz.questions; let i = index">
+              <td class="small-cell">{{ i + 1 }}</td>
+              <td>
+                <input class="question input is-small acc-header-question"  onclick="toggleQuestion(this)"
+                  type="text" [(ngModel)]="question.text" />
+                <span class="acc-body-question">
+                    <span *ngFor="let answer of question.answers; let j = index">
+                        <br *ngIf="j == 2">
+                      <input class="answer input is-small" style="width: 30%" type="text"
+                          [ngClass]="(answer.correct) ? 'is-success' : 'is-primary'"
+                          [(ngModel)]="answer.text" placeholder="Odgovor">
+                    </span>
+                </span>
+              </td>
+              
+              <td><button class="button is-small is-primary" (click)='deleteQuestion(question)'>
+                    <span class="icon is-small">
+                      <i class="fa fa-trash-o"></i>
+                    </span>
+                  </button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+        <button class="button is-small" (click)='addQuestion()'>
+            Dodaj pitanje</button>
+      </div>
+
+    </section>
+
+    <footer class="modal-card-foot">
+        <!-- check if dirty, and act accordingly -->
+        <!-- check if there are no empty questions or answers -->
+      <div>
+        <button *ngIf="selectedQuiz.key" class="button is-primary" (click)='deleteQuiz()'>Obriši</button>
+        <button class="button is-link is-outlined" (click)='copyQuizToPublic()' [disabled]="!name.valid">Kopiraj za vježbu</button>
+      </div>
+      <div>
+        <button class="button is-link" (click)='saveQuiz()' [disabled]="!name.valid">Spremi</button>
+        <button class="button" (click)='closeModal()'>Odustani</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- modal - SUBJECT -->
+
+<div class="modal" id="modalSubject" *ngIf="showSubjectForm">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+
+      <!--<p class="modal-card-title">-->
+      <div class="column is-offset-2 is-8">
+        <input placeholder="Naziv predmeta" class="input is-focused"
+        [(ngModel)]="selectedSubject.name"
+        required minlength="2" maxlength="30"
+        #name='ngModel' autofocus>
+      </div>
+        
+      <button class="delete" aria-label="close" (click)='closeModalSubject()'></button>
+    </header>
+    <!--
+      <section class="modal-card-body">
+      </section>
+    -->
+    <footer class="modal-card-foot">
+      <div>
+        <button *ngIf="selectedSubject.$key" class="button is-primary" (click)='deleteSubject()'>Obriši</button>
+      </div>
+      <div>
+        <button class="button is-link" (click)='saveSubject()' [disabled]="!name.valid">Spremi</button>
+        <button class="button" (click)='closeModalSubject()'>Odustani</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- modal - START quiz ** removed from here -->
+
+<div class="modal" id="modalStartQuiz" *ngIf="showStartQuizForm">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+  
+        <!--<p class="modal-card-title">-->
+        <p class="modal-card-title">{{ selectedSubject.name }}</p>
+         
+        <button class="delete" aria-label="close" (click)='closeModalStartQuiz()'></button>
+      </header>
+      <section class="modal-card-body">
+        
+        <h5 class="has-text-centered">Pokreni kviz za razred:</h5>
+         
+        <div class="columns">
+          <div class="column is-8 is-offset-2">
+            <div class="control has-icons-left">
+              <div class="select is-fullwidth">
+                <select [(ngModel)]="selectedStartQuiz.quiz" class="is-focused">
+                  <option [ngValue]="pickQuiz" disabled="true" selected>{{ pickQuiz.name }}</option>
+                  <option *ngFor="let quiz of selectedSubject.quizzes" [ngValue]="quiz">{{quiz.name}}</option>
+                </select>
+              </div>
+              <span class="icon is-left">
+                <i class="fa fa-list-ol"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+  
+        <!--
+        <div class="columns">
+          <div class="column is-8 is-offset-2">
+            <div class="control has-icons-left">
+              <div class="select is-fullwidth">
+                <select [(ngModel)]="selectedStartQuiz.classroom">
+                  <option [ngValue]="pickClassroom" disabled="true" selected>{{ pickClassroom.name }}</option>
+                  <option *ngFor="let classroom of classrooms" [ngValue]="classroom">{{classroom.name}}</option>
+                </select>
+              </div>
+              <span class="icon is-left">
+                <i class="fa fa-users"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        -->
+
+        <div class="columns">
+          <div class="column is-8 is-offset-2">
+            <div class="control has-icons-left">
+              <div class="select is-fullwidth">
+                <!-- <select [(ngModel)]="selectedStartQuiz.classroom"> -->
+                <select [(ngModel)]="selectedClassroom">
+                  <option [ngValue]="pickClassroom" disabled="true" selected>{{ pickClassroom.name }}</option>
+                  <option *ngFor="let classroom of classrooms | async" [ngValue]="classroom">{{classroom.name}}</option>
+                </select>
+              </div>
+              <span class="icon is-left">
+                <i class="fa fa-users"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        
+      </section>
+      <footer class="modal-card-foot">
+        <!-- check if everything is filled up -->
+        <div>
+          <button class="button is-primary" (click)='startQuiz()'>Pokreni</button>
+        </div>
+        <div>
+          <button class="button" (click)='closeModalStartQuiz()'>Odustani</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+  

@@ -1,0 +1,91 @@
+<div class="modal" id="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+
+      <!--<p class="modal-card-title">-->
+      <div class="column is-offset-2 is-8">
+        <input placeholder="Naziv kviza" class="input"
+        [(ngModel)]="subjectForm.name"
+        required minlength="2" maxlength="30"
+        #name='ngModel' autofocus>
+      </div>
+       
+      <button class="delete" aria-label="close" (click)='close()'></button>
+    </header>
+    <section class="modal-card-body">
+      
+      <!-- pick subject -->
+      <div class="is-pulled-right">
+        <div class="select">
+          <select class="button" [(ngModel)]="subjectForm.name">
+            <option value="" selected>Odaberi razred</option>
+            <option *ngFor="let subject of allSubjects" [ngValue]="$key">
+                  {{ subject.name }}
+            </option>
+          </select> 
+        </div>
+        <button class="button">+</button>
+      </div>
+      
+
+      <!-- table of questions -->
+      <div>
+        <table class="table is-narrow" *ngIf="exampleQuestions?.length">
+          <h5><b>Pitanja:</b></h5>
+          <tbody>
+            <tr *ngFor="let question of exampleQuestions; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ question.question }}
+                  <br>
+                  <input class="input is-primary is-small" style="width: 30%" type="text" placeholder="Odgovor">
+                  <input class="input is-danger is-small" style="width: 30%" type="text" placeholder="Odgovor">
+                  <br>
+                  <input class="input is-danger is-small" style="width: 30%" type="text" placeholder="Odgovor">
+                  <input class="input is-danger is-small" style="width: 30%" type="text" placeholder="Odgovor">
+              </td>
+
+              <td *ngFor="let answer of exampleQuestions.answers">
+                {{ answer }}
+              </td>
+
+              <td><button class="button is-small is-danger" (click)='deactivateStudent(classroom?.id)'>
+                    <span class="icon">
+                      <i class="fa fa-trash-o"></i>
+                    </span>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+    </section>
+
+    <footer class="modal-card-foot">
+
+      <!-- check if dirty, and act accordingly -->
+
+      <div>
+        <!-- TODO - create item - rename functions once done -->
+        <button class="button is-primary" (click)='saveClassroom()' [disabled]="!name.valid">Spremi</button>
+        <!-- other option for validation:
+          [disabled]="name?.length < 2 || name?.length > 200"
+        -->
+        <button class="button" (click)='close()'>Odustani</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- additional buttons 
+
+<div class="card-footer">
+  <span class="button is-small is-success card-footer-item" *ngIf='classroom.active' (click)='updateActive(false)'>Mark Complete</span>
+  <span class="button is-small is-warning card-footer-item" *ngIf='!classroom.active' (click)='updateActive(true)'>Mark Incomplete</span>
+  <span class="button is-small is-danger card-footer-item" (click)='deleteClassroom()'>Delete</span>
+</div>
+
+-->

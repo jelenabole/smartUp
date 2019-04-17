@@ -1,0 +1,16 @@
+<article class="message is-link">
+  <div class="message-header">
+    <p>Naziv predmeta</p>
+  </div>
+  <div class="message-body is-clearfix">
+    <div class="is-pulled-left">
+      <h4>{{ exercise.quiz.name }}</h4>
+      <p class="is-pulled-left"> 
+        <!--<strong> {{ exercise.quiz.name }} </strong> <br>-->
+        {{ exercise.professorName }}
+    </p>
+    </div>
+    <button class="button is-pulled-right" (click)='startExercise()'>Start</button>
+  </div>
+</article>
+

@@ -1,0 +1,85 @@
+<div class="content">
+
+  <br>
+  
+  <!--
+  <h1 style="display: inline">Moji rezultati:</h1>
+  -->
+  <div class="columns is-multiline">
+    <div class="column is-8 is-offset-2">
+      <div style="display: block;">
+        <!-- width="400" height="200" -->
+      <canvas baseChart
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+
+    <!-- table -->
+    <!--
+    <div class="col-md-6" style="margin-bottom: 10px">
+      <table class="table table-responsive table-condensed">
+        <tr>
+          <th *ngFor="let label of lineChartLabels">{{label}}</th>
+        </tr>
+        <tr *ngFor="let d of lineChartData">
+          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+        </tr>
+      </table>
+    </div>
+    -->
+
+  </div>
+
+  <br>
+
+  <!-- dnevni rezultati -->
+  <!--
+  <div *ngIf="dailyPoints | async">
+    <table>
+      <tr>
+        <th *ngFor="let points of dailyPoints | async">{{ points.date }}</th>
+      </tr>
+      <tr>
+        <td *ngFor="let points of dailyPoints | async">{{ points.points }}</td>
+      </tr>
+    </table>
+  </div>
+  -->
+
+  <br>
+  <br>
+
+  <div *ngIf="results | async">
+    <!-- za svaki predmet -->
+    <div *ngFor="let subject of results | async">
+      <h3>{{ subject.$key }}</h3>
+      <hr>
+      <table>
+        <tr>
+          <th>Naziv kviza</th>
+          <th class="has-text-centered">Datum</th>
+          <th class="has-text-centered">Bodovi</th>
+          <th class="is-hidden-mobile has-text-centered">Postotak</th>
+        </tr>
+        <tr *ngFor="let quiz of subject">
+          <td>{{ quiz.quizName }}</td>
+          <td class="has-text-centered">{{ quiz.date }}</td>
+          <td class="has-text-centered">{{ quiz.points }}</td>
+          <td class="is-hidden-mobile has-text-centered">{{ (quiz.points / quiz.numberOfQuestions * 100) | number : '1.0-2'}} %</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+
+  <!-- maybe not necessary, or at least make better one -->
+  <loading-spinner *ngIf="showSpinner"></loading-spinner>
+  
+</div>
