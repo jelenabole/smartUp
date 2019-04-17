@@ -1,3 +1,3 @@
 # SmartUp
 
-## Angular + Firebase Progressive Web App
+## Angular + Firebase Web App
