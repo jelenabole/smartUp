@@ -1,40 +1,46 @@
+@import "../../../../styles/variables";
+
 .content-header {
   margin: 2%;
+}
+
+h1  {
+  display: inline;
+}
+
+.header-divider {
+  margin: 0.5rem 0 1rem 0;
 }
 
 .card {
   margin-bottom: 10px;
   padding: 10px;
   box-shadow: none;
+  background-color: transparent;
 }
 
-.question-removed {
-  border: none;
-  width: 80%;
-  border-radius: 5px;
-  border-bottom: 1px solid lightslategray;
-  border-top: 1px solid lightslategray;
+.is-link {
+  text-decoration: none;
 }
 
-.answer.is-primary {
-  background-color: rgba(233, 84, 32, 0.2);
-  //rgba(233, 84, 32, 0.3);
+.small-cell {
+  width: 0.1%;
+  white-space: nowrap;
 }
 
-.answer.is-success {
-  background-color: rgba(56, 180, 74, 0.2);
-  // plava:
-  //rgba(23, 162, 184, 0.2);
-  //rgba(56, 180, 74, 0.25);
-}
+/*** answers ***/
 
-/**** questions and answers ***/
 .acc-body-question {
   display: none;
 }
 
+.answer.is-primary {
+  background-color: rgba(233, 84, 32, 0.2);
+}
 
-
+.answer.is-success {
+  background-color: rgba(56, 180, 74, 0.2);
+}
 
 /****** modal ******/
 
@@ -53,19 +59,3 @@
 .modal-card-foot {
   justify-content: space-between;
 }
-
-/*** add class to the "active" accordion ***/
-
-h1  {
-  display: inline;
-}
-
-.is-link {
-  text-decoration: none;
-}
-
-.small-cell {
-  width: 0.1%;
-  white-space: nowrap;
-}
-

@@ -51,15 +51,18 @@
 
   <script>
     function toggleAccord(elem) {
+      // check if element should be opened or closed (blurred):
       var open = false;
-      // check if element should be opened:
       var panel = elem.nextElementSibling;
+
       // TODO - why isnt it 0px at the begining? 
       if (panel.style.maxHeight == "0px" || panel.style.maxHeight == "") {
         open = true;
+      } else {
+        elem.blur();
       }
 
-       // toggle all other elements:
+      // toggle all other elements:
       var accords = document.getElementsByClassName("acc-header");
       var panels = document.getElementsByClassName("acc-body");
       for (i = 0; i < panels.length; i++) {
@@ -67,16 +70,18 @@
         panels[i].style.padding = "0%";
         panels[i].style.borderWidth = "0px";
         accords[i].style.borderRadius = "15px";
-        accords[i].classList.remove("active");
+        accords[i].classList.add("is-outlined");
+        // accords[i].blur();
       }
 
       // open the element:
       if (open) {
         panel.style.padding = "0% 4%";
-        panel.style.borderWidth = "1px";
+        panel.style.borderWidth = "2px";
         panel.style.maxHeight = panel.scrollHeight + "px";
         elem.style.borderRadius = "15px 15px 0 0";
-        elem.classList.add("active");
+        elem.classList.remove("is-outlined");
+        // elem.focus();
       }
     }
 

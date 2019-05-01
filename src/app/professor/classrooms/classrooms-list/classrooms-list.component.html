@@ -2,7 +2,7 @@
   <div class="content-header">
     <button class="button is-info is-outlined is-pulled-right" (click)="addNewClassroom()">Dodaj razred</button>
     <h1 style="display: inline">Moji razredi:</h1> 
-    <hr>
+    <hr class="header-divider">
   </div>
   
   <p *ngIf="tutorial">Odaberite razred ili dodajte novi.</p>
@@ -52,12 +52,14 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ student.name }}</td>
 
-                <td><button class="button is-small is-primary" 
-                  (click)='deleteStudent(student)'>
-                    <span class="icon is-small">
-                    <i class="fa fa-trash-o"></i>
-                  </span>
-                </button></td>
+                <td>
+                  <button class="button is-small is-danger is-outlined"
+                    (click)='deleteStudent(student)'>
+                    <span class="icon is-large">
+                      <i class="far fa-trash-alt"></i>
+                    </span>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -81,7 +83,7 @@
        
     <footer class="modal-card-foot">
       <div>
-        <button *ngIf="selectedClassroom.$key" class="button is-primary" (click)='deleteClassroom()'>Obriši razred</button>
+        <button *ngIf="selectedClassroom.$key" class="button is-danger" (click)='deleteClassroom()'>Obriši razred</button>
       </div>
       <div>
         <button class="button is-link" (click)='saveClassroom()' [disabled]="!name.valid">Spremi</button>

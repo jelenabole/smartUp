@@ -1,43 +1,41 @@
-<!-- accordions - black ones -->
+<!-- accordions -->
 
-<button class="accordion acc-header button is-dark is-outlined"
+<button class="acc-header button is-link is-outlined"
       onclick="toggleAccord(this)">{{ classroom.name }} 
-      <span class="opacity"> ( {{ classroom.code }} )</span>
-    </button>
+  <span class="opacity"> ( {{ classroom.code }} )</span>
+</button>
 
-<div class="panel acc-body">
-    <div class="">
-      <button class="button is-pulled-right is-primary is-outlined" (click)='addStudents()'>
-        <i class="fa fa-user-plus"></i>
-      </button>
-      <button class="button is-pulled-right is-info is-outlined" (click)='editClassroom()'>
-          <i style="font-size: 21px;" class="fa fa-edit"></i>
-      </button>
-      <!--
-        <button class="button is-info is-outlined is-pulled-right" (click)='prepareQuizModal()'>Pokreni kviz</button>
-      -->
+<div class="acc-body">
+  <!-- buttons -->
+  <button class="button is-pulled-right is-info is-outlined" (click)='addStudents()'>
+    <span class="icon is-small">
+      <i class="fa fa-user-plus"></i>
+    </span>
+  </button>
+  <button class="button is-pulled-right is-primary is-outlined" (click)='editClassroom()'>
+    <span class="icon is-small">
+      <i class="fa fa-edit"></i>
+    </span>
+  </button>
 
-      <div *ngIf="!classroom.students?.length">
-          <h5 class="table-head"><b>Nema upisanih učenika!</b></h5>
-      </div>
+  <div *ngIf="!classroom.students?.length">
+      <h5 class="table-head"><b>Nema upisanih učenika!</b></h5>
+  </div>
+  <div *ngIf="classroom.students?.length">
+    <h5 class="table-head"><b>Popis učenika:</b></h5>
+    <hr class="is-marginless">
+  </div>
 
-      <div *ngIf="classroom.students?.length">
-        <h5 class="table-head"><b>Popis učenika:</b></h5>
-        <hr>
-      </div>
-    </div>
-
-    
-    <div style="width: 100%" *ngIf="classroom.students?.length">
-      <table class="table is-narrow">
-        <tbody>
-          <tr *ngFor="let student of classroom.students; let i = index">
-            <td class="small-cell">{{ i + 1 }}</td>
-            <td>{{ student.name }}</td>
-            <td>{{ student.points }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-</div>
   
+  <div style="width: 100%" *ngIf="classroom.students?.length">
+    <table class="table is-narrow">
+      <tbody>
+        <tr *ngFor="let student of classroom.students; let i = index">
+          <td class="small-cell">{{ i + 1 }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.points }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

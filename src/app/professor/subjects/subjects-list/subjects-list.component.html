@@ -2,7 +2,7 @@
   <div class="content-header">
     <button class="button is-info is-outlined is-pulled-right" (click)="openModalToAddSubject()">Dodaj predmet</button>
     <h1 style="display: inline">Moji predmeti:</h1>
-    <hr>
+    <hr class="header-divider">
   </div>
 
   <div *ngFor="let subject of subjects | async" class="card">
@@ -12,12 +12,6 @@
   <!-- maybe not necessary, or at least make better one -->
   <loading-spinner *ngIf="showSpinner"></loading-spinner>
 </div>
-
-
-<!--
-<subject-form></subject-form>
--->
-
 
 
 

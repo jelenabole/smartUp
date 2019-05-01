@@ -1,3 +1,5 @@
+@import "../../../../styles/variables";
+
 .button {
   border-radius: 0;
   margin: 10px 5px;
@@ -5,40 +7,34 @@
   font-weight: bold;
 }
 
-.message-header h3 {
-  color: papayawhip;
-}
-
-
-
 .acc-header {
   margin: 0;
-  width: 100%;
-  border-radius: 15px;
   padding: 3%;
-  transition: 0.4;
-  transition: border-radius 0.1s ease-out;
+  width: 100%;
   text-align: left !important;
   line-height: 4px;
-
-//  background-color: #828282;
-//  background-color: #772953;
+  border-radius: 15px;
+  border-width: 2px;
+  transition: 0.4;
+  transition: border-radius 0.1s ease-out;
 }
 
 .acc-body {
+  background-color: white;
   margin: 0;
   padding: 0;
   width: 100%;
-  
-  border-radius: 0 0 15px 15px;
- // border-color: #828282;
- // border-color: #772953;
-  border-style: solid;
-  border-width: 0px;
-
-  overflow: hidden;
   max-height: 0px;
+  border-radius: 0 0 15px 15px;
+  border: 0px solid $dark;
+  overflow: hidden;
   transition: max-height 0.2s ease-out, padding 0.1s;
+}
+
+/** TABLE **/
+
+.table {
+  margin-bottom: 2%;
 }
 
 .table-head {
