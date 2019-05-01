@@ -1,67 +1,15 @@
 <div> <!-- id="wrapper" -->
-  <!-- 
-<div *ngIf="ifQuizSelected">
-  vratiti ovo studentima na top nav
 
-  -->
+  <!-- if user is logged in -->
   <div *ngIf="(auth.user | async) as user">
 
-    <!-- za profesore -->
-    <div>
-      <!-- top menu -->
-      <nav class="nav has-shadow" *ngIf="user.professor">
-        <div class="container">
-          <div class="nav-left">
-            <a class="nav-item">
-              <!-- Website -->
-            </a>
-          </div>
-          <div class="nav-center">
-            <a href="/" class="nav-item hero-brand">
-              <img src="../assets/images/logo.png" alt="SUP Admin Panel">
-            </a>
-          </div>
-          
-          <label for="menu-toggle" class="nav-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </label>
-          <input type="checkbox" id="menu-toggle" class="is-hidden"/>
-          <div class="nav-right nav-menu">
-            <!--
-            <a class="nav-item is-tab is-hidden-tablet">
-              <span class="icon"><i class="fa fa-home"></i></span> Home
-            </a>
-            <a class="nav-item is-tab is-hidden-tablet">
-              <span class="icon"><i class="fa fa-table"></i></span> Links
-            </a>
-            <a class="nav-item is-tab is-hidden-tablet">
-              <span class="icon"><i class="fa fa-info"></i></span> About
-            </a>
-            -->
-            
-            <!--
-            <a class="nav-item is-tab is-active">
-              <span class="icon"><i class="fa fa-user"></i></span>
-            </a>
-            <a class="nav-item is-tab">
-              <span class="icon"><i class="fa fa-sign-out"></i></span>
-            </a>
-            -->
-          </div>
-        </div>
-      </nav>
-
-
-
+    <!-- for professors: -->
+    <div *ngIf="user.professor">
       <!-- side bar nav + user profile -->
-      <section [ngClass]="user.professor ? 'float-left' : ''">
-      <!-- [ngClass]="user.professor ? 'main-content columns is-fullheight': ''" -->
+      <section  [ngClass]="user.professor ? 'float-left' : ''">
 
-      <!-- classes = column is-3 is-hidden-mobile -->
-        <aside *ngIf="user.professor" 
-          class=" is-narrow-mobile is-fullheight section">
+        <!-- classes = column is-3 is-hidden-mobile -->
+        <aside  class="is-narrow-mobile is-fullheight section">
           <user-profile></user-profile>
 
           <hr class="navbar-divider">
@@ -69,8 +17,8 @@
           <ul class="menu-list">
             <li>
               <a routerLink="/exams" routerLinkActive="active">
-                <span class="icon is-small"><i class="fa fa-table"></i></span>
-                Kvizovi
+                <span class="icon is-small"><i class="far fa-calendar-times"></i></span>
+                <span>Kvizovi</span>
               </a>
             </li>
           </ul>
@@ -81,20 +29,20 @@
             <li>
               <a routerLink="/classrooms">
                 <span class="icon is-small"><i class="fa fa-users"></i></span>
-                Razredi
+                <span>Razredi</span>
               </a>
             </li>
             <li>
               <a routerLink="/stats">
                 <span class="icon is-small"><i class="fa fa-list-ol"></i></span>
-                Rezultati
+                <span>Rezultati</span>
               </a>
             </li>
             <li>
               <!--  <a routerLink="/subjects" -->
               <a routerLink="subjects">
                 <span class="icon is-small"><i class="fa fa-book"></i></span>
-                Predmeti
+                <span>Predmeti</span>
               </a>
             </li>
           </ul>
@@ -104,62 +52,34 @@
           <ul class="menu-list">
             <li>
               <a (click)="logout()">
-                <span class="icon is-small"><i class="fa fa-sign-out"></i></span> Odjava
+                <span class="icon is-small"><i class="fa fa-sign-out-alt"></i></span>
+                <span>Odjava</span>
               </a>
             </li>
           </ul>
         </aside>
-      
+      </section>
+      <!-- prof ends -->
+    </div>
 
 
 
 
-
-        <!-- student start -->
-      <div *ngIf="!user.professor">
-        <section class="hero is-warning grey-dark" *ngIf="ifQuizSelected">
-          <!-- Hero content: will be in the middle -->
-          <user-profile></user-profile>
-          <!-- Hero footer: will stick at the bottom -->
-          <top-nav></top-nav>
-        </section>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-       
-
-        <!-- MAIN 
-        <div [ngClass]="user.professor ? 'container column is-8' : ''">
-        </div>
-        -->
-        
+    <!-- student start -->
+    <div *ngIf="!user.professor">
+      <section class="hero is-warning grey-dark" *ngIf="ifQuizSelected">
+        <!-- Hero content: will be in the middle -->
+        <user-profile></user-profile>
+        <!-- Hero footer: will stick at the bottom -->
+        <top-nav></top-nav>
       </section>
     </div>
-    <!-- prof ends -->
 
-    
-
-
-
-    
   </div>
   
-  <!-- (auth.user)?.professor ?  -->
 
+
+  <!-- if user is not logged in = HERO-->
   <div *ngIf="!(auth.user | async)">
     <section class="hero is-light" *ngIf="ifQuizSelected">
       <!-- Hero content: will be in the middle -->
@@ -168,12 +88,11 @@
   </div>
 
 
-
-    <div [ngClass]="((auth.user | async)?.professor) ? 'float-right' : ''">
-      <div>
-        <router-outlet></router-outlet>
-      </div>
-     
+  <!-- router outlet -->
+  <div [ngClass]="((auth.user | async)?.professor) ? 'float-right' : ''">
+    <div>
+      <router-outlet></router-outlet>
     </div>
+  </div>
  
 </div>

@@ -1,9 +1,10 @@
 <div class="content">
-  <button class="button is-info is-outlined is-pulled-right" (click)="openModalToAddSubject()">Dodaj predmet</button>
-  <h1 style="display: inline">Moji predmeti:</h1>
-  
-  <hr>
-  
+  <div class="content-header">
+    <button class="button is-info is-outlined is-pulled-right" (click)="openModalToAddSubject()">Dodaj predmet</button>
+    <h1 style="display: inline">Moji predmeti:</h1>
+    <hr>
+  </div>
+
   <div *ngFor="let subject of subjects | async" class="card">
     <subject-detail [subject]='subject'></subject-detail>
   </div>
@@ -16,10 +17,6 @@
 <!--
 <subject-form></subject-form>
 -->
-
-
-
-
 
 
 

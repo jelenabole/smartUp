@@ -1,101 +1,96 @@
 <div *ngIf="!(auth.user | async); else alreadyLoggedIn" class="has-text-centered">
 
-    <h3>Prijava za profesore:</h3>
-  
-      <button (click)="signInWithGoogle()" class="button btn-social btn-google">
-        <i class="fa fa-google fa-lg"></i> Google prijava
-      </button>
-  
-      <hr>
-  
-    <h3>Prijava za učenike:</h3>
+  <h3>Prijava za profesore:</h3>
 
-    <div class="columns is-mobile has-text-centered">
-      <div class="field column is-6 is-offset-3">
-        <input placeholder="Korisničko ime" class="input is-focused" [(ngModel)]="studentName"
-          required minlength="2" maxlength="30" #name='ngModel'>
-      </div>
+  <button (click)="signInWithGoogle()" class="button btn-social btn-google">
+    <span class="icon is-small">
+      <i class="fab fa-google"></i>
+    </span>
+    <span>Google prijava</span>
+  </button>
+
+  <hr>
+
+  <h3>Prijava za učenike:</h3>
+
+  <div class="columns is-mobile has-text-centered">
+    <div class="field column is-6 is-offset-3">
+      <input placeholder="Korisničko ime" class="input is-focused" [(ngModel)]="studentName"
+        required minlength="2" maxlength="30" #name='ngModel'>
     </div>
-      
-    <button (click)="signInAnonymously()" class="button btn-social btn-anonymous" [disabled]="!name.valid">
-        <i class="fa fa-user-secret fa-lg"></i> Prijava imenom
-    </button>
-    <!--
-    <button (click)="signInWithGoogle()" class="button btn-social btn-twitter">
-        <i class="fa fa-user-secret fa-lg"></i> Prijava imenom
-    </button>
-    -->
-
-
-
-    
-
-
-      <!--
-      <div class="columns">
-        <div class="column is-4">
-          <p class="control has-icons-left has-icons-right">
-            <input placeholder="Korisničko ime" class="input" [(ngModel)]="studentName"
-              required minlength="2" maxlength="30" #name='ngModel'>
-            <span class="icon is-small is-left">
-              <i class="fa fa-user"></i>
-            </span>
-          </p>
-        </div>
-      </div>
-      -->
-      
-      <!--
-      <div class="columns">
-        <div class="column is-4">
-          <p class="control has-icons-left has-icons-right">
-            <input type="password" placeholder="Lozinka" class="input" [(ngModel)]="studentPassword"
-                required minlength="2" maxlength="10" #pass='ngModel'>
-              <span class="icon is-small is-left">
-                <i class="fa fa-lock"></i>
-              </span>
-            </p>
-          </div>
-        </div>
-      --> 
-      <!--
-      <button (click)="signInAnonymously()" class="button button-info" [disabled]="!name.valid">
-        <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
-      </button>
-      -->
-
-      <!--
-      <p>{{ loginMessage }}</p>
-
-      <button (click)="registerStudent()" class="button button-info">
-        <i class="fa fa-user-secret fa-lg"></i> Register
-      </button>
-     
-      <button (click)="loginStudent()" class="button button-info">
-        <i class="fa fa-user-secret fa-lg"></i> Login
-      </button>
-
-      <button (click)="testButton()" class="button button-info">
-       <i class="fa fa-user-secret fa-lg"></i> Test button
-      </button>
-
-      -->
-      <hr>
-  
   </div>
-  
-  <ng-template #alreadyLoggedIn>
-    <div class="has-text-centered">
-      <p class="text-success">
-        Prijavljeni ste!
-      </p>
-      <button class="button is-small" (click)="logout()">Odjava</button>
-    </div>
     
-  </ng-template>
+  <button (click)="signInAnonymously()" class="button btn-social btn-anonymous"
+    [disabled]="!name.valid">
+    <span class="icon is-small">
+      <i class="fa fa-user-secret"></i>
+    </span>
+    <span>Prijava imenom</span>
+  </button>
+
+  <hr>
+
   
-    
+
 
   <!--
-      <user-form></user-form>
-    -->
+  <div class="columns">
+    <div class="column is-4">
+      <p class="control has-icons-left has-icons-right">
+        <input placeholder="Korisničko ime" class="input" [(ngModel)]="studentName"
+          required minlength="2" maxlength="30" #name='ngModel'>
+        <span class="icon is-small is-left">
+          <i class="fa fa-user"></i>
+        </span>
+      </p>
+    </div>
+  </div>
+  -->
+  
+  <!--
+  <div class="columns">
+    <div class="column is-4">
+      <p class="control has-icons-left has-icons-right">
+        <input type="password" placeholder="Lozinka" class="input" [(ngModel)]="studentPassword"
+            required minlength="2" maxlength="10" #pass='ngModel'>
+          <span class="icon is-small is-left">
+            <i class="fa fa-lock"></i>
+          </span>
+        </p>
+      </div>
+    </div>
+  --> 
+  <!--
+  <button (click)="signInAnonymously()" class="button button-info" [disabled]="!name.valid">
+    <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
+  </button>
+  -->
+
+  <!--
+  <p>{{ loginMessage }}</p>
+
+  <button (click)="registerStudent()" class="button button-info">
+    <i class="fa fa-user-secret fa-lg"></i> Register
+  </button>
+  
+  <button (click)="loginStudent()" class="button button-info">
+    <i class="fa fa-user-secret fa-lg"></i> Login
+  </button>
+
+  <button (click)="testButton()" class="button button-info">
+    <i class="fa fa-user-secret fa-lg"></i> Test button
+  </button>
+
+  -->
+
+</div>
+  
+<ng-template #alreadyLoggedIn>
+  <div class="has-text-centered">
+    <p class="text-success">
+      Prijavljeni ste!
+    </p>
+    <button class="button is-small" (click)="logout()">Odjava</button>
+  </div>
+  
+</ng-template>

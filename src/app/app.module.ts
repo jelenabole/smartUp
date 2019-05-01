@@ -54,7 +54,6 @@ import { ChartsModule } from 'ng2-charts';
     ResultModule,
 
     ChartsModule,
-
     AngularFireModule.initializeApp(firebaseConfig),
   ],
   bootstrap: [

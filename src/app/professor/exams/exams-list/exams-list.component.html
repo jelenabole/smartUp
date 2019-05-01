@@ -1,8 +1,9 @@
 <div class="content" *ngIf="!showResults">
-  <button class="button is-info is-outlined is-pulled-right" (click)="openModalToStartQuiz()">Dodaj kviz</button>
-
-  <h1 style="display: inline">Aktivni kvizovi:</h1>
-  <hr>
+  <div class="content-header">
+    <button class="button is-info is-outlined is-pulled-right" (click)="openModalToStartQuiz()">Dodaj kviz</button>
+    <h1 style="display: inline">Aktivni kvizovi:</h1>
+    <hr>
+  </div>
 
   <div class="columns is-multiline">
     <div *ngFor="let exam of exams | async" class="column is-half">

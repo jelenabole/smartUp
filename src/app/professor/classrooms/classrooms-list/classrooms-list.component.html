@@ -1,8 +1,10 @@
 <div class="content">
-  <button class="button is-info is-outlined is-pulled-right" (click)="addNewClassroom()">Dodaj razred</button>
-  <h1 style="display: inline">Moji razredi:</h1>
+  <div class="content-header">
+    <button class="button is-info is-outlined is-pulled-right" (click)="addNewClassroom()">Dodaj razred</button>
+    <h1 style="display: inline">Moji razredi:</h1> 
+    <hr>
+  </div>
   
-  <hr>
   <p *ngIf="tutorial">Odaberite razred ili dodajte novi.</p>
   
   <div *ngFor="let classroom of classrooms | async" class="card">

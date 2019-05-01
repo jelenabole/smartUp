@@ -1,13 +1,8 @@
-import { Component, Query } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { AuthService } from '../../core/auth.service';
 import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { QueryFn } from 'angularfire2/firestore';
-
-import {AngularFireModule } from 'angularfire2';
 import { UserService, MyUser } from '../../shared/user.service';
 
 @Component({
@@ -15,7 +10,6 @@ import { UserService, MyUser } from '../../shared/user.service';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.scss'],
 })
-
 export class UserLoginComponent {
 
   // TODO - number of photos:

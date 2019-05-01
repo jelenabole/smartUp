@@ -1,6 +1,8 @@
 <div class="content">
-  <h1 style="display: inline">Rezultati:</h1>
-  <hr>
+  <div class="content-header">
+    <h1 style="display: inline">Rezultati:</h1> 
+    <hr>
+  </div>
   
   <div *ngFor="let classroom of classrooms | async" class="card">
     <stat-detail [classroom]='classroom'></stat-detail>
