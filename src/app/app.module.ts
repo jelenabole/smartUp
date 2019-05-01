@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -16,21 +15,20 @@ import { SharedModule } from './shared/shared.module';
 // Feature Modules
 import { UiModule } from './ui/shared/ui.module';
 
-import { ClassroomModule } from './classrooms/shared/classroom.module';
-import { SubjectModule } from './subjects/shared/subject.module';
-import { ExamModule } from './exams/shared/exam.module';
-import { StatModule } from './stats/shared/stat.module';
+import { ClassroomModule } from './professor/classrooms/classroom.module';
+import { SubjectModule } from './professor/subjects/subject.module';
+import { ExamModule } from './professor/exams/exam.module';
+import { StatModule } from './professor/stats/stat.module';
 
-import { QuizModule } from './quizzes/shared/quiz.module';
-import { ExerciseModule } from './exercises/shared/exercise.module';
-import { ResultModule } from './results/shared/result.module';
+import { QuizModule } from './student/quizzes/quiz.module';
+import { ExerciseModule } from './student/exercises/exercise.module';
+import { ResultModule } from './student/results/result.module';
 ///// End FireStarter
 
 import { environment } from '../environments/environment';
 
 import { AngularFireModule } from 'angularfire2';
 export const firebaseConfig = environment.firebaseConfig;
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ChartsModule } from 'ng2-charts';
 
 

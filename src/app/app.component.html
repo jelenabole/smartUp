@@ -65,7 +65,7 @@
           <user-profile></user-profile>
 
           <hr class="navbar-divider">
-          <p class="menu-label is-hidden-touch">Trenutno</p>
+          <p class="menu-label is-hidden-touch">Aktivno</p>
           <ul class="menu-list">
             <li>
               <a routerLink="/exams" routerLinkActive="active">
@@ -73,21 +73,21 @@
                 Kvizovi
               </a>
             </li>
-            <li>
-              <a routerLink="/stats">
-                <span class="icon is-small"><i class="fa fa-list-ol"></i></span>
-                Rezultati
-              </a>
-            </li>
           </ul>
 
           <hr class="navbar-divider">
-          <p class="menu-label is-hidden-touch">Baza</p>
+          <p class="menu-label is-hidden-touch">Pregled</p>
           <ul class="menu-list">
             <li>
               <a routerLink="/classrooms">
                 <span class="icon is-small"><i class="fa fa-users"></i></span>
                 Razredi
+              </a>
+            </li>
+            <li>
+              <a routerLink="/stats">
+                <span class="icon is-small"><i class="fa fa-list-ol"></i></span>
+                Rezultati
               </a>
             </li>
             <li>
@@ -100,7 +100,7 @@
           </ul>
 
           <hr class="navbar-divider">
-          <p class="menu-label is-hidden-touch">Ostalo</p>
+          <p class="menu-label is-hidden-touch">...</p>
           <ul class="menu-list">
             <li>
               <a (click)="logout()">

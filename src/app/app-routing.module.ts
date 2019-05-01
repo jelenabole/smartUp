@@ -3,14 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UserLoginComponent } from './ui/user-login/user-login.component';
 import { ReadmePageComponent } from './ui/readme-page/readme-page.component';
-import { ClassroomsListComponent } from './classrooms/classrooms-list/classrooms-list.component';
-import { SubjectsListComponent } from './subjects/subjects-list/subjects-list.component';
-import { ExamsListComponent } from './exams/exams-list/exams-list.component';
-import { StatsListComponent } from './stats/stats-list/stats-list.component';
-
-import { QuizzesListComponent } from './quizzes/quizzes-list/quizzes-list.component';
-import { ExercisesListComponent } from './exercises/exercises-list/exercises-list.component';
-import { ResultsListComponent } from './results/results-list/results-list.component';
+// professors pages:
+import { ClassroomsListComponent } from './professor/classrooms/classrooms-list/classrooms-list.component';
+import { SubjectsListComponent } from './professor/subjects/subjects-list/subjects-list.component';
+import { ExamsListComponent } from './professor/exams/exams-list/exams-list.component';
+import { StatsListComponent } from './professor/stats/stats-list/stats-list.component';
+// students pages:
+import { QuizzesListComponent } from './student/quizzes/quizzes-list/quizzes-list.component';
+import { ExercisesListComponent } from './student/exercises/exercises-list/exercises-list.component';
+import { ResultsListComponent } from './student/results/results-list/results-list.component';
 
 import { AuthGuard } from './core/auth.guard';
 
