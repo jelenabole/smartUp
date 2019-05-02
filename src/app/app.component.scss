@@ -1,35 +1,11 @@
-main {
-    padding: 0px;
+@import "/../styles/variables";
+
+.prof-nav {
+   padding: 3%;
+   -webkit-box-shadow: -1px -2px 7px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: -1px -2px 7px 0px rgba(0,0,0,0.5);
+    box-shadow: -1px -2px 7px 0px rgba(0,0,0,0.5);
 }
-
-/**** Side nav *****/
-
-.navbar-divider {
-    display: block;
-}
-
-aside a {
-    font-weight: 500;
-}
-
-aside {
-    border-right: solid 2px rgba(32, 156, 238, 0.5);
-}
-
-aside hr {
-    background-color: rgba(32, 156, 238, 0.5);
-}
-
-.float-right {
-    float: right;
-    width: 75%;
-}
-
-.float-left {
-    float: left;
-    width: 24%;
-}
-
 
 .grey-dark {
     color: hsl(0, 0%, 29%);

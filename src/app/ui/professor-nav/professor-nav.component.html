@@ -1,0 +1,45 @@
+<!-- classes = column is-3 is-hidden-mobile -->
+<hr class="navbar-divider">
+<p class="menu-label is-hidden-touch">Aktivno</p>
+<ul class="menu-list">
+  <li>
+    <a routerLink="exams" routerLinkActive="active">
+      <span class="icon is-small"><i class="far fa-calendar-times"></i></span>
+      <span>Kvizovi</span>
+    </a>
+  </li>
+</ul>
+
+<hr class="navbar-divider">
+<p class="menu-label is-hidden-touch">Pregled</p>
+<ul class="menu-list">
+  <li>
+    <a routerLink="classrooms" routerLinkActive="active">
+      <span class="icon is-small"><i class="fa fa-users"></i></span>
+      <span>Razredi</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="stats" routerLinkActive="active">
+      <span class="icon is-small"><i class="fa fa-list-ol"></i></span>
+      <span>Rezultati</span>
+    </a>
+  </li>
+  <li>
+    <!--  <a routerLink="/subjects" -->
+    <a routerLink="subjects" routerLinkActive="active">
+      <span class="icon is-small"><i class="fa fa-book"></i></span>
+      <span>Predmeti</span>
+    </a>
+  </li>
+</ul>
+
+<hr class="navbar-divider">
+<ul class="menu-list">
+  <li>
+    <a (click)="logout()">
+      <span class="icon is-small"><i class="fa fa-sign-out-alt"></i></span>
+      <span>Odjava</span>
+    </a>
+  </li>
+</ul>

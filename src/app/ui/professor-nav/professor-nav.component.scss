@@ -1,0 +1,17 @@
+@import "/../../../styles/variables";
+
+.navbar-divider {
+    display: block;
+    background-color: $teal-op;
+    background-color: $teal;
+    height: 1px;
+}
+
+a {
+    font-weight: 500;
+    padding: 0.5em 4em 0.5em 1em;
+}
+
+.active {
+    background-color: $teal-op01;
+}

@@ -12,6 +12,7 @@ import { TopNavComponent } from '../top-nav/top-nav.component';
 import { ReadmePageComponent } from '../readme-page/readme-page.component';
 import { NotificationMessageComponent } from '../notification-message/notification-message.component';
 import { TopLogoBar } from '../top-logo-bar/top-logo-bar.component';
+import { ProfessorNavComponent } from '../professor-nav/professor-nav.component';
 
 @NgModule({
   imports: [
@@ -28,12 +29,14 @@ import { TopLogoBar } from '../top-logo-bar/top-logo-bar.component';
     ReadmePageComponent,
 
     TopNavComponent,
+    ProfessorNavComponent,
     TopLogoBar,
     UserProfileComponent,
     NotificationMessageComponent
   ],
   exports: [
     TopNavComponent,
+    ProfessorNavComponent,
     TopLogoBar,
     UserProfileComponent,
     NotificationMessageComponent
