@@ -1,16 +1,16 @@
 <div class="content">
   <div class="content-header">
     <button class="button is-info is-outlined is-pulled-right" (click)="addNewClassroom()">Dodaj razred</button>
-    <h1 style="display: inline">Moji razredi:</h1> 
+    <h1>Moji razredi:</h1>
     <hr class="header-divider">
   </div>
-  
+
   <p *ngIf="tutorial">Odaberite razred ili dodajte novi.</p>
-  
+
   <div *ngFor="let classroom of classrooms | async" class="card">
     <classroom-detail [classroom]='classroom'></classroom-detail>
   </div>
-  
+
   <!-- maybe not necessary, or at least make better one -->
   <loading-spinner *ngIf="showSpinner"></loading-spinner>
 </div>
@@ -22,22 +22,19 @@
 <!-- MODAL - dodaj novi razred -->
 
 <div class="modal" id="modal" *ngIf="showForm">
-  <div class="modal-background"></div>
+  <div class="modal-background" (click)='closeModal()'></div>
   <div class="modal-card">
-    <header class="modal-card-head">
 
-      <!--<p class="modal-card-title">-->
-      <div class="column is-offset-2 is-8">
-        <input placeholder="Naziv razreda" class="input is-focused"
-        [(ngModel)]="selectedClassroom.name"
-        required minlength="2" maxlength="30"
-        #name='ngModel' autofocus>
+    <header class="modal-card-head">
+      <div class="modal-card-title">
+        <input placeholder="Naziv razreda" class="input is-focused column is-offset-3 is-6" [(ngModel)]="selectedClassroom.name"
+          required minlength="2" maxlength="30" #name='ngModel' autofocus>
       </div>
-       
-      <button class="delete" aria-label="close" (click)='closeModal()'></button>
+      <button class="delete is-medium" aria-label="close" (click)='closeModal()'></button>
     </header>
+
+
     <section class="modal-card-body" *ngIf="selectedClassroom?.students">
-      
       <div>
         <!-- tablice za studente i predmete -->
         <div class="columns">
@@ -53,8 +50,7 @@
                 <td>{{ student.name }}</td>
 
                 <td>
-                  <button class="button is-small is-danger is-outlined"
-                    (click)='deleteStudent(student)'>
+                  <button class="button is-small is-danger is-outlined" (click)='deleteStudent(student)'>
                     <span class="icon is-large">
                       <i class="far fa-trash-alt"></i>
                     </span>
@@ -76,11 +72,11 @@
             </p>
           </div>
         -->
-    
+
         </div>
       </div>
     </section>
-       
+
     <footer class="modal-card-foot">
       <div>
         <button *ngIf="selectedClassroom.$key" class="button is-danger" (click)='deleteClassroom()'>Obriši razred</button>
@@ -101,26 +97,30 @@
 
 <div class="modal" id="modalQRCode" *ngIf="showQRCode">
 
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <div class="column is-offset-2 is-8">
-          <h3>{{ selectedClassroom.name }}</h3>
-        </div>
-        <button class="delete is-medium" aria-label="close" (click)='closeQRCode()'></button>
-      </header>
+  <div class="modal-background" (click)='closeQRCode()'></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{ selectedClassroom.name }}</p>
+      <button class="delete is-medium" aria-label="close" (click)='closeQRCode()'></button>
+    </header>
 
-      <section class="modal-card-body">
-            <!-- QR code -->
-          <div class="column is-offset-3 is-6" *ngIf="tutorial">
-            explanation for QR codes
-          </div>
+    <section class="modal-card-body">
+      <!-- QR code -->
+      <div class="column is-offset-3 is-6" *ngIf="tutorial">
+        explanation for QR codes
+      </div>
 
-          <div>
-              <img src="assets/images/QRcode.jpg" />
-          </div>
-      </section>
-         
-    </div>
+      <div>
+        <img src="assets/images/QRcode.jpg" />
+      </div>
+    </section>
+
+    <footer class="modal-card-foot">
+      <div></div>
+      <div>
+        <button class="button" (click)='closeQRCode()'>Zatvori</button>
+      </div>
+    </footer>
+
   </div>
-  
+</div>

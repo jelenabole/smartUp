@@ -2,15 +2,27 @@
   margin: 2%;
 }
 
+h1  {
+  display: inline;
+}
+
+.header-divider {
+  margin: 0.5rem 0 1rem 0;
+}
+
 .card {
   margin-bottom: 10px;
   padding: 10px;
   box-shadow: none;
+  background-color: transparent;
 }
 
 .is-link {
   text-decoration: none;
 }
+
+
+/*** modals ***/
 
 .modal .modal-card-head {
   text-align: center;
@@ -20,11 +32,8 @@
   justify-content: space-between;
 }
 
-/*** add class to the "active" accordion ***/
-h1  {
-  display: inline;
- // color: #772953 !important;
-}
+
+/*** table and answer colors ***/
 
 .green {
   color: green;
