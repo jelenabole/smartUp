@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'stats-list',
   templateUrl: './stats-list.component.html',
-  styleUrls: ['./stats-list.component.scss'],
+  styleUrls: ['../../list.component.scss', './stats-list.component.scss'],
 })
 export class StatsListComponent implements OnInit {
 
@@ -33,16 +33,16 @@ export class StatsListComponent implements OnInit {
   }
 
 
-   /**** MODAL functions *****/
+  /**** MODAL functions *****/
 
-   // open modal with students:
+  // open modal with students:
   showStudents(classroom: Classroom) {
     this.selectedClassroom = JSON.parse(JSON.stringify(classroom));
 
     // order students by points:
     var users = this.selectedClassroom.students;
     if (users != undefined) {
-      users.sort(function(a, b) {
+      users.sort(function (a, b) {
         return a.points > b.points ? -1 : a.points < b.points ? 1 : 0
       })
     }
@@ -61,7 +61,7 @@ export class StatsListComponent implements OnInit {
       // za svako pitanje, sortiraj učenike po vremenu:
       for (var i = 0; i < this.selectedQuiz.questions.length; i++) {
         if (this.selectedQuiz.questions[i].givenAnswers != undefined) {
-          this.selectedQuiz.questions[i].givenAnswers.sort(function(a, b) {
+          this.selectedQuiz.questions[i].givenAnswers.sort(function (a, b) {
             return a.time > b.time ? 1 : a.time < b.time ? -1 : 0
           })
           var correct = 0;
@@ -71,11 +71,8 @@ export class StatsListComponent implements OnInit {
             }
           }
           this.selectedQuiz.questions[i].percent =
-              (correct / this.selectedQuiz.questions[i].givenAnswers.length) * 100;
+            (correct / this.selectedQuiz.questions[i].givenAnswers.length) * 100;
         }
-
-        
-
       }
     }
 

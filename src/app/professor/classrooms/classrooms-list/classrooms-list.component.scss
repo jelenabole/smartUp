@@ -1,38 +1,5 @@
-@import "../../../../styles/variables";
-
-.content-header {
-  margin: 2%;
-}
-
-h1  {
-  display: inline;
-}
-
-.header-divider {
-  margin: 0.5rem 0 1rem 0;
-}
-
-.card {
-  margin-bottom: 10px;
-  padding: 10px;
-  box-shadow: none;
-  background-color: transparent;
-}
-
-.is-link {
-  text-decoration: none;
-}
-
 /*** modals ***/
 
 #modalQRCode {
   text-align: center;
-}
-
-.modal .modal-card-head input {
-  text-align: center;
-}
-
-.modal-card-foot {
-  justify-content: space-between;
 }

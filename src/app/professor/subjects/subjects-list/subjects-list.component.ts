@@ -5,18 +5,17 @@ import { Observable } from 'rxjs/Observable';
 import { ClassroomService } from '../../classrooms/classroom.service';
 import { Classroom } from '../../classrooms/classroom';
 
-
 @Component({
   selector: 'subjects-list',
   templateUrl: './subjects-list.component.html',
-  styleUrls: ['./subjects-list.component.scss'],
+  styleUrls: ['../../list.component.scss', './subjects-list.component.scss'],
 })
 export class SubjectsListComponent implements OnInit {
 
   // TODO - catch classrooms from professor, and dont reset (they are the same):
   classrooms: Observable<Classroom[]>;
   subjects: Observable<Subject[]>;
-  
+
   showSpinner = true;
   showForm = true;
   showSubjectForm = true;
@@ -97,7 +96,7 @@ export class SubjectsListComponent implements OnInit {
         if (elem.key === quizID) return true;
       })[0];
     }
-    
+
     this.open("modal");
   }
 
@@ -198,7 +197,7 @@ export class SubjectsListComponent implements OnInit {
 
       // XXX - we cant push into empty object:
       if (this.selectedSubject.quizzes == undefined) {
-        this.selectedSubject.quizzes = []; 
+        this.selectedSubject.quizzes = [];
       }
       this.selectedSubject.quizzes.push(this.selectedQuiz);
     }
@@ -250,7 +249,7 @@ export class SubjectsListComponent implements OnInit {
     this.closeModalStartQuiz();
   }
 
-  prepareQuiz() : StartedQuiz {
+  prepareQuiz(): StartedQuiz {
     // TODO - shuffle quiz questions, and answers
     // write them down
 
@@ -266,7 +265,7 @@ export class SubjectsListComponent implements OnInit {
       isSynced: false,
       isStarted: false,
       activeStudents: [],
-    
+
       // time and students:
       professorName: this.subjectService.professorName,
       secondsPerQuestion: 10,
@@ -282,7 +281,7 @@ export class SubjectsListComponent implements OnInit {
   }
 
   // additional function for shuffling the questions and answers:
-  shuffleQuestions (array: any) {
+  shuffleQuestions(array: any) {
     var copy = Object.assign([], array);
     var another: Question[] = [];
     var m = array.length, i;
@@ -299,7 +298,7 @@ export class SubjectsListComponent implements OnInit {
     }
     return another;
   }
-  shuffleAnswers (array: any) {
+  shuffleAnswers(array: any) {
     var copy = Object.assign([], array);
     var another: Answer[] = [];
     var m = array.length, i;
@@ -319,7 +318,7 @@ export class SubjectsListComponent implements OnInit {
   }
 
   // TODO - zahardkodirane informacije
-  prepareExercise() : StartedQuiz {
+  prepareExercise(): StartedQuiz {
     // make a new quiz, shuffle questions, then shuffle answers
     this.selectedQuiz.questions = this.shuffleQuestions(this.selectedQuiz.questions);
 
@@ -328,7 +327,7 @@ export class SubjectsListComponent implements OnInit {
       isSynced: false,
       isStarted: false,
       activeStudents: [],
-    
+
       // time and students:
       professorName: this.subjectService.professorName,
       secondsPerQuestion: 10,
@@ -358,7 +357,7 @@ export class SubjectsListComponent implements OnInit {
   addNewQuestion(): Question {
     var numberOfAnswers = 4;
     var question = new Question;
-    
+
     question.answers = [];
     for (var i = 0; i < numberOfAnswers; i++) {
       question.answers.push(new Answer);

@@ -1,38 +1,62 @@
 <!-- accordions -->
 
-<button class="acc-header button is-dark is-outlined"
-  onclick="toggleAccord(this)">{{ subject.name }}</button>
+<button class="acc-header button is-dark is-outlined" onclick="toggleAccord(this)">{{ subject.name }}</button>
 
 <div class="acc-body">
   <!-- buttons -->
-  <button class="button is-pulled-right is-info is-outlined" (click)='addQuiz()'>
-    <span class="icon is-small">
+  <button class="button is-info is-outlined is-pulled-right" (click)='addQuiz()'>
+    <span class="icon">
       <i class="fa fa-plus"></i>
     </span>
   </button>
-  <button class="button is-pulled-right is-primary is-outlined" (click)='editSubject()'>
-    <span class="icon is-small">
+  <button class="button is-primary is-outlined is-pulled-right" (click)='editSubject()'>
+    <span class="icon">
       <i class="fa fa-pencil-alt"></i>
     </span>
   </button>
 
 
   <div *ngIf="!subject.quizzes?.length">
-      <h5 class="table-head"><b>Nema unesenih kvizova!</b></h5>
+    <h5 class="table-head"><b>Nema unesenih kvizova!</b></h5>
   </div>
-
   <div *ngIf="subject.quizzes?.length">
     <h5 class="table-head"><b>Kvizovi:</b></h5>
     <hr class="is-marginless">
   </div>
 
 
-  <div style="width: 100%" *ngIf="subject.quizzes?.length">
+  <div *ngIf="subject.quizzes?.length">
     <table class="table is-narrow">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Naziv</th>
+          <th class="has-text-centered">Broj pitanja</th>
+          <th class="has-text-right">Akcije</th>
+        </tr>
+      </thead>
+
       <tbody>
         <tr *ngFor="let quiz of subject.quizzes; let i = index">
           <td class="small-cell">{{ i + 1 }}</td>
           <td><a (click)='editQuiz(quiz.key)'>{{ quiz.name }}</a></td>
+          <td class="has-text-centered">{{ quiz.questions.length }}</td>
+          <!-- buttons -->
+          <td class="has-text-right">
+            <button (click)='setForPractice(quiz.key)' class="button is-link is-outlined is-small is-marginless">
+              <span clas="icon">
+                <i class="far fa-heart"></i>
+                <!-- practice quiz:
+                  <i class="fas fa-heart"></i> 
+                -->
+              </span>
+            </button>
+            <button (click)='editQuiz(quiz.key)' class="button is-link is-outlined is-small is-marginless">
+              <span clas="icon">
+                <i class="fa fa-eye"></i>
+              </span>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

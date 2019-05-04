@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 
 // Core
 import { CoreModule } from './core/core.module';
-
 // Shared/Widget
 import { SharedModule } from './shared/shared.module';
 
@@ -26,15 +25,13 @@ import { ResultModule } from './student/results/result.module';
 ///// End FireStarter
 
 import { environment } from '../environments/environment';
-
 import { AngularFireModule } from 'angularfire2';
 export const firebaseConfig = environment.firebaseConfig;
 import { ChartsModule } from 'ng2-charts';
 
-
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

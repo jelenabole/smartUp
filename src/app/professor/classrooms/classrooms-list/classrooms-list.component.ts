@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'classrooms-list',
   templateUrl: './classrooms-list.component.html',
-  styleUrls: ['./classrooms-list.component.scss'],
+  styleUrls: ['../../list.component.scss', './classrooms-list.component.scss'],
 })
 export class ClassroomsListComponent implements OnInit {
 
@@ -42,7 +42,7 @@ export class ClassroomsListComponent implements OnInit {
 
   saveClassroom() { // save classroom, and clear modal
     console.log("save");
-    
+
     if (this.selectedClassroom.$key == undefined) {
       this.classroomService.createClassroom(this.selectedClassroom);
     } else {
@@ -82,7 +82,7 @@ export class ClassroomsListComponent implements OnInit {
   }
 
 
-  
+
   /****** modal functions  *****/
 
   addNewClassroom() {

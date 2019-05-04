@@ -1,39 +1,47 @@
 <!-- accordions -->
 
-<button class="acc-header button is-link is-outlined"
-      onclick="toggleAccord(this)">{{ classroom.name }} 
-  <span class="opacity"> ( {{ classroom.code }} )</span>
+<button class="acc-header button is-dark is-outlined" onclick="toggleAccord(this)">{{ classroom.name }}
+  <span class="opacity">( {{ classroom.code }} )</span>
 </button>
 
 <div class="acc-body">
   <!-- buttons -->
-  <button class="button is-pulled-right is-info is-outlined" (click)='addStudents()'>
-    <span class="icon is-small">
+
+  <button class="button is-info is-outlined is-pulled-right" (click)='addStudents()'>
+    <span class="icon">
       <i class="fa fa-user-plus"></i>
     </span>
   </button>
-  <button class="button is-pulled-right is-primary is-outlined" (click)='editClassroom()'>
-    <span class="icon is-small">
-      <i class="fa fa-edit"></i>
+  <button class="button is-primary is-outlined is-pulled-right" (click)='editClassroom()'>
+    <span class="icon">
+      <i class="fa fa-pencil-alt"></i>
     </span>
   </button>
 
   <div *ngIf="!classroom.students?.length">
-      <h5 class="table-head"><b>Nema upisanih učenika!</b></h5>
+    <h5 class="table-head"><b>Nema upisanih učenika!</b></h5>
   </div>
   <div *ngIf="classroom.students?.length">
     <h5 class="table-head"><b>Popis učenika:</b></h5>
     <hr class="is-marginless">
   </div>
 
-  
-  <div style="width: 100%" *ngIf="classroom.students?.length">
+
+  <div *ngIf="classroom.students?.length">
     <table class="table is-narrow">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Ime</th>
+          <th class="has-text-centered">Bodovi</th>
+        </tr>
+      </thead>
+
       <tbody>
         <tr *ngFor="let student of classroom.students; let i = index">
           <td class="small-cell">{{ i + 1 }}</td>
           <td>{{ student.name }}</td>
-          <td>{{ student.points }}</td>
+          <td class="has-text-centered">{{ student.points }}</td>
         </tr>
       </tbody>
     </table>

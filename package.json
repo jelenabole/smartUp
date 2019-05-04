@@ -1,6 +1,6 @@
 {
-  "name": "firestarter",
-  "version": "0.0.0",
+  "name": "smartUp",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

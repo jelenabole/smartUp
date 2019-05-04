@@ -1,57 +1,56 @@
-<!-- accordions - black ones -->
+<!-- accordion -->
 
-<button class="accordion acc-header button is-dark is-outlined"
-      onclick="toggleAccord(this)">{{ classroom.name }} 
-      <!--<span class="opacity"> ( {{ classroom.code }} )</span>-->
-    </button>
+<button class="acc-header button is-dark is-outlined" onclick="toggleAccord(this)">{{ classroom.name }}</button>
 
-<div class="panel acc-body">
-    <div class="">
-      <button class="button is-pulled-right is-primary is-outlined" (click)='showStudents()'>
-          <i class="icon is-small" class="fa fa-users"></i>
-      </button>
+<div class="acc-body">
+  <!-- buttons -->
+  <button class="button is-primary is-outlined is-pulled-right" (click)='showStudents()'>
+    <span class="icon">
+      <i class="fa fa-users"></i>
+    </span>
+  </button>
 
-      <div *ngIf="!classroom.quizzes?.length">
-          <h5 class="table-head"><b>Nema pokrenutih kvizova!</b></h5>
-      </div>
 
-      <div *ngIf="classroom.quizzes?.length">
-        <h5 class="table-head"><b>Popis kvizova:</b></h5>
-        <hr>
-      </div>
-    </div>
+  <div *ngIf="!classroom.quizzes?.length">
+    <h5 class="table-head"><b>Nema pokrenutih kvizova!</b></h5>
+  </div>
+  <div *ngIf="classroom.quizzes?.length">
+    <h5 class="table-head"><b>Popis kvizova:</b></h5>
+    <hr class="is-marginless">
+  </div>
 
-    
-    <div style="width: 100%" *ngIf="classroom.quizzes?.length">
-      <table class="table is-narrow">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Naziv</th>
-            <th class="has-text-centered">Otvoreno do</th>
-            <th class="has-text-centered">Broj pitanja</th>
-            <th class="has-text-centered">Pregled</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let quiz of classroom.quizzes; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ quiz.quizName }}</td>
 
-            <td class="has-text-centered" *ngIf="quiz.isSynced">Sinkronizirano</td>
-            <td class="has-text-centered" *ngIf="!quiz.isSynced">{{ quiz.openUntil }}</td>
+  <div *ngIf="classroom.quizzes?.length">
+    <table class="table is-narrow">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Naziv</th>
+          <th class="has-text-centered">Otvoreno do</th>
+          <th class="has-text-centered">Broj pitanja</th>
+          <th class="has-text-centered">Pregled</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quiz of classroom.quizzes; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ quiz.quizName }}</td>
 
-            <td class="has-text-centered">{{ quiz.questions.length }}</td>
-            <!-- pogledaj bodove učenika (listu)
-              ili pogledaj odgovore na pitanja (pitanja, odg) -->
-            <td class="has-text-centered"><button (click)="showQuestions(i)" class="button is-small">
-              <span clas="icon is-small">
-                  <i class="fa fa-eye"></i>
+          <td *ngIf="quiz.isSynced" class="has-text-centered">Sinkronizirano</td>
+          <td *ngIf="!quiz.isSynced" class="has-text-centered">{{ quiz.openUntil }}</td>
+
+          <td class="has-text-centered">{{ quiz.questions.length }}</td>
+
+          <!-- test info buttons -->
+          <td class="has-text-centered">
+            <button (click)="showQuestions(i)" class="button is-link is-outlined is-small is-marginless">
+              <span clas="icon">
+                <i class="fa fa-eye"></i>
               </span>
-            </button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-  

@@ -6,7 +6,7 @@ import { SubjectsListComponent } from '../subjects-list/subjects-list.component'
 @Component({
   selector: 'subject-detail',
   templateUrl: './subject-detail.component.html',
-  styleUrls: ['./subject-detail.component.scss']
+  styleUrls: ['../../detail.component.scss', './subject-detail.component.scss']
 })
 export class SubjectDetailComponent {
 
@@ -21,6 +21,10 @@ export class SubjectDetailComponent {
 
   addQuiz() {
     this.subjectList.openModalToAddQuiz(this.subject);
+  }
+
+  setForPractice(quizID: string) {
+    console.log("set for practice - not implemented");
   }
 
   editQuiz(quizID: string) {

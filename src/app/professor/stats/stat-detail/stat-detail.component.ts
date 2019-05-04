@@ -5,7 +5,7 @@ import { StatsListComponent } from '../stats-list/stats-list.component';
 @Component({
   selector: 'stat-detail',
   templateUrl: './stat-detail.component.html',
-  styleUrls: ['./stat-detail.component.scss']
+  styleUrls: ['../../detail.component.scss', './stat-detail.component.scss']
 })
 export class StatDetailComponent {
 

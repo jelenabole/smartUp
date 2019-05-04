@@ -1,52 +1,5 @@
-@import "../../../../styles/variables";
+/**** opacity for classroom codes ****/
 
-.button {
-  border-radius: 0;
-  margin: 10px 5px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.acc-header {
-  margin: 0;
-  padding: 3%;
-  width: 100%;
-  text-align: left !important;
-  line-height: 4px;
-  border-radius: 15px;
-  border-width: 2px;
-  transition: 0.4;
-  transition: border-radius 0.1s ease-out;
-}
-
-.acc-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-height: 0px;
-  border-radius: 0 0 15px 15px;
-  border: 0px solid $blue;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out, padding 0.1s;
-}
-
-/** TABLE **/
-
-.table {
-  margin-bottom: 2%;
-}
-
-.table-head {
-  margin-top: 4%;
-  display: inline-block;
-}
-
-.small-cell {
-  width: 0.1%;
-  white-space: nowrap;
-}
-
-/**** opacity for codes ****/
 .opacity {
   color: rgba(34, 34, 34, 0.5);
   padding-left: 3%;

@@ -6,7 +6,7 @@ import { ClassroomsListComponent } from '../classrooms-list/classrooms-list.comp
 @Component({
   selector: 'classroom-detail',
   templateUrl: './classroom-detail.component.html',
-  styleUrls: ['./classroom-detail.component.scss']
+  styleUrls: ['../../detail.component.scss', './classroom-detail.component.scss']
 })
 export class ClassroomDetailComponent {
 
@@ -15,7 +15,7 @@ export class ClassroomDetailComponent {
 
   constructor(private classroomService: ClassroomService, private classList: ClassroomsListComponent) {
     this.tutorial = classList.tutorial;
-   }
+  }
 
   editClassroom() {
     console.log("edit");

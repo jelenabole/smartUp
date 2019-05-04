@@ -1,0 +1,51 @@
+@import "../../styles/variables";
+
+/*** accordion ***/
+
+.button {
+  border-radius: 0;
+  margin: 10px 5px;
+}
+
+.acc-header {
+  font-weight: bold;
+  margin: 0;
+  padding: 3%;
+  width: 100%;
+  text-align: left !important;
+  line-height: 4px;
+  border-radius: 15px;
+  border-width: 2px;
+  transition: 0.4;
+  transition: border-radius 0.1s ease-out;
+}
+
+.acc-body {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-height: 0px;
+  border-radius: 0 0 15px 15px;
+  border: 0px solid $dark;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out, padding 0.1s;
+}
+
+
+/** tables **/
+
+.table {
+  margin-bottom: 2%;
+}
+
+.table-head {
+  display: inline-block;
+  line-height: 3em;
+  margin: 0;
+}
+
+.small-cell {
+  width: 0.1%;
+  white-space: nowrap;
+}

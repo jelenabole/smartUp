@@ -12,7 +12,7 @@ export class Classroom {
   active = true; // to "delete" or not show
   timeStamp: number; // when it was made
   // student = id, name (results, points, ...)
-  
+
   students: Student[];
 
   quizzes: Quiz[];

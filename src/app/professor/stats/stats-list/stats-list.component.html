@@ -49,14 +49,14 @@
                   <tr>
                     <th>#</th>
                     <th>Učenik</th>
-                    <th>Odgovor</th>
-                    <th>Vrijeme</th>
+                    <th class="has-text-centered">Odgovor</th>
+                    <th class="has-text-centered">Vrijeme</th>
                   </tr>
                   <tr *ngFor="let answer of question.givenAnswers; let j = index">
                     <td class="small-cell">{{ j + 1 }}</td>
                     <td>{{ answer.student }}</td>
-                    <td [ngClass]="answer.correct ? 'green': 'red'">{{ answer.answer }}</td>
-                    <td>{{ (answer.time + 1) | number : '1.0-2' }}</td>
+                    <td class="has-text-centered" [ngClass]="answer.correct ? 'green': 'red'">{{ answer.answer }}</td>
+                    <td class="has-text-centered">{{ (answer.time + 1) | number : '1.0-2' }}</td>
                   </tr>
                 </table>
               </td>
@@ -110,14 +110,14 @@
             <tr>
               <th class="small-cell">#</th>
               <th>Ime učenika</th>
-              <th>Bodovi</th>
+              <th class="has-text-centered">Bodovi</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let student of classroom.students; let i = index">
               <td class="small-cell">{{ i + 1 }}</td>
               <td>{{ student.name }}</td>
-              <td>{{ student.points }}</td>
+              <td class="has-text-centered">{{ student.points }}</td>
             </tr>
           </tbody>
         </table>
