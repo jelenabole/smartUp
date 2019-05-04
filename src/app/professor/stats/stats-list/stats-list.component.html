@@ -42,7 +42,8 @@
           <tbody>
             <tr *ngFor="let question of quiz.questions; let i = index">
               <td class="small-cell">{{ i + 1 }}</td>
-              <td class="small-cell green" *ngIf="question.percent">{{ question.percent | number : '1.0-0' }}%</td>
+              <td class="small-cell green" [ngClass]="question.percent > 50 ? 'green': 'red'"
+                *ngIf="question.percent != undefined">{{ question.percent | number : '1.0-0' }} %</td>
               <td>{{ question.text }}
                 <br *ngIf="question.givenAnswers">
                 <table class="table is-narrow" *ngIf="question.givenAnswers">
