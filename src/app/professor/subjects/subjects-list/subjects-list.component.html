@@ -42,20 +42,21 @@
             <tr *ngFor="let question of selectedQuiz.questions; let i = index">
               <td class="small-cell">{{ i + 1 }}</td>
               <td>
-                <input class="question input is-small acc-header-question" onclick="toggleQuestion(this)" type="text"
+                <input class="acc-header-question input is-small" onclick="toggleQuestion(this)" type="text"
                   [(ngModel)]="question.text" />
                 <span class="acc-body-question">
                   <span *ngFor="let answer of question.answers; let j = index">
                     <br *ngIf="j == 2">
-                    <input class="answer input is-small" style="width: 30%" type="text" [ngClass]="(answer.correct) ? 'is-success' : 'is-primary'"
+                    <input class="answer input is-small" type="text" [ngClass]="(answer.correct) ? 'is-success' : 'is-danger'"
                       [(ngModel)]="answer.text" placeholder="Odgovor">
                   </span>
                 </span>
               </td>
 
-              <td><button class="button is-small is-primary" (click)='deleteQuestion(question)'>
+              <td class="small-cell">
+                <button class="button is-small is-danger is-outlined" (click)='deleteQuestion(question)'>
                   <span class="icon is-small">
-                    <i class="fa fa-trash-o"></i>
+                    <i class="fa fa-trash-alt"></i>
                   </span>
                 </button>
               </td>

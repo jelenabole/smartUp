@@ -1,10 +1,22 @@
 /*** answers ***/
 
+.acc-header-question {
+  border-width: 2px;
+}
+
+.acc-header-question:focus {
+  border-width: 1px;
+}
+
 .acc-body-question {
   display: none;
 }
 
-.answer.is-primary {
+.answer {
+  width: 45%;
+}
+
+.answer.is-danger {
   background-color: rgba(233, 84, 32, 0.2);
 }
 
